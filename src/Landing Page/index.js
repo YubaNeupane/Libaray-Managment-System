@@ -1,1 +1,12 @@
-console.log('THis si a new change');
+import React from 'react';
+import { Navbar } from './Component/Navbar';
+
+function LandingPage() {
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
+}
+
+export default LandingPage;
