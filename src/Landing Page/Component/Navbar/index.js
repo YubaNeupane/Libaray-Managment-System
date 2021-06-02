@@ -17,7 +17,7 @@ export const Navbar = ({ toggle }) => {
     <>
       <Nav>
         <NavbarContainer>
-          <NavLogo to="/">Super MANG</NavLogo>
+          <NavLogo to="/">Super Library Management</NavLogo>
           <MobileIcon onClick={toggle}>
             <FaBars />
           </MobileIcon>
