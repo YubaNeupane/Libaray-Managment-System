@@ -26,6 +26,9 @@ function LandingPage() {
       <InfoSection {...landingObjTwo} />
       <Services />
       <InfoSection {...landingObjThree} />
+      <div>
+        <h1>This is a footer</h1>
+      </div>
     </div>
   );
 }

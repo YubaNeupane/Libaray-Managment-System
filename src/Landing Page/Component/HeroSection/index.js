@@ -35,6 +35,13 @@ export default function HeroSection() {
             onMouseLeave={onHover}
             primary="true"
             dark="true"
+            to="signup"
+            smooth={true}
+            duration={500}
+            spy={true}
+            exact="true"
+            offset={-80}
+            activeClass="active"
           >
             Get Started! {hover ? <ArrowForward /> : <ArrowRight />}
           </Button>
