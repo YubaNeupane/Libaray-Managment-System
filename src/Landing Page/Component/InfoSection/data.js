@@ -44,10 +44,10 @@ export const landingObjThree = {
   description:
     'Get access to our cutting edge magamennt system techoloogy for free without any hidden fees',
   buttonLabel: 'Start Now',
-  imgStart: true,
+  imgStart: false,
   img: require('../../../resources/landing/images/svg1.svg').default,
   alt: 'Papers',
   dark: false,
   primary: false,
-  darkText: false,
+  darkText: true,
 };

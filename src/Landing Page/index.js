@@ -8,6 +8,7 @@ import {
   landingObjTwo,
   landingObjThree,
 } from './Component/InfoSection/data';
+import Services from './Component/Services';
 
 function LandingPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,7 @@ function LandingPage() {
       <HeroSection />
       <InfoSection {...landingObjOne} />
       <InfoSection {...landingObjTwo} />
+      <Services />
       <InfoSection {...landingObjThree} />
     </div>
   );
