@@ -15,7 +15,7 @@ import {
   NavBtnLink,
 } from './NavbarElements';
 
-export const Navbar = ({ toggle }) => {
+export const Navbar = ({ toggle, handleClickOpen }) => {
   const [scrollNav, setScrollNav] = useState(false);
 
   const changeNav = () => {
@@ -100,7 +100,7 @@ export const Navbar = ({ toggle }) => {
               </NavItem>
             </NavMenu>
             <NavBtn>
-              <NavBtnLink to="/signin">Sign In</NavBtnLink>
+              <NavBtnLink onClick={handleClickOpen}>Sign In</NavBtnLink>
             </NavBtn>
           </NavbarContainer>
         </Nav>
