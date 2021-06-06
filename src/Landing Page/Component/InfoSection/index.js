@@ -31,6 +31,7 @@ export default function InfoSection({
   primary,
   dark,
   dark2,
+  handleClickOpen,
 }) {
   return (
     <>
@@ -44,6 +45,7 @@ export default function InfoSection({
                 <Subtitle darkText={darkText}>{description}</Subtitle>
                 <BtnWrap>
                   <Button
+                    onClick={handleClickOpen}
                     to="home"
                     smooth={true}
                     duration={500}

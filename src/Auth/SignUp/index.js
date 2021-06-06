@@ -9,8 +9,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 
-import SignInContent from './SignInContent';
-import SignUp from '../SignUp/SignUpContent';
+import SignUpContent from './SignUpContent';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,18 +17,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({
+export default function SignUp({
   handleClickOpen,
   handleClose,
   open,
-  handleClickOpenSignUp,
-  handleCloseSignUp,
+  handleClickOpenSignIn,
+  handleCloseSignIn,
 }) {
   const classes = useStyles();
 
   const handleCloseAndOpen = () => {
     handleClose();
-    handleClickOpenSignUp();
+    handleClickOpenSignIn();
   };
 
   return (
@@ -39,10 +38,7 @@ export default function SignIn({
       aria-labelledby="form-dialog-title"
     >
       <DialogContent className={classes.container}>
-        <SignInContent
-          handleClose={handleClose}
-          handleClickOpenSignUp={handleCloseAndOpen}
-        />
+        <SignUpContent handleClickOpenSignUp={handleCloseAndOpen} />
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
