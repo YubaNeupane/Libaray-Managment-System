@@ -86,14 +86,12 @@ export default function SignIn({ handleClickOpenSignUp }) {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+              <Typography variant="body2">Forgot password?</Typography>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2" onClick={handleClickOpenSignUp}>
+              <Typography variant="body2" onClick={handleClickOpenSignUp}>
                 {"Don't have an account? Sign Up"}
-              </Link>
+              </Typography>
             </Grid>
           </Grid>
         </form>

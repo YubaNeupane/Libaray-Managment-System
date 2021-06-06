@@ -120,9 +120,9 @@ export default function SignUp({ handleClickOpenSignUp }) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2" onClick={handleClickOpenSignUp}>
+              <Typography variant="body2" onClick={handleClickOpenSignUp}>
                 Already have an account? Sign in
-              </Link>
+              </Typography>
             </Grid>
           </Grid>
         </form>
