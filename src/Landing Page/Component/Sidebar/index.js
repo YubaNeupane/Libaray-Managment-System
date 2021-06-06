@@ -10,7 +10,7 @@ import {
   SidebarRoute,
 } from './sidebarElements';
 
-export const Sidebar = ({ isOpen, toggle }) => {
+export const Sidebar = ({ isOpen, toggle, handleClickOpen }) => {
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
       <Icon>
@@ -32,7 +32,7 @@ export const Sidebar = ({ isOpen, toggle }) => {
           </SidebarLink>
         </SidebarMenu>
         <SideBtnWrap>
-          <SidebarRoute to="/signin">Sign In</SidebarRoute>
+          <SidebarRoute onClick={handleClickOpen}>Sign In</SidebarRoute>
         </SideBtnWrap>
       </SidebarWrapper>
     </SidebarContainer>
