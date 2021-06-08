@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { Button } from './../../Landing Page/Component/ButtonElement';
 
@@ -34,8 +34,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ handleClickOpenSignUp }) {
+export default function SignIn({ handleClickOpenSignUp, signInUser }) {
   const classes = useStyles();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignIn = () => {
+    console.log(email);
+    signInUser(email, password);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -57,6 +65,8 @@ export default function SignIn({ handleClickOpenSignUp }) {
             id="email"
             label="Email Address"
             name="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             autoComplete="email"
             autoFocus
           />
@@ -65,6 +75,8 @@ export default function SignIn({ handleClickOpenSignUp }) {
             margin="normal"
             required
             fullWidth
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             name="password"
             label="Password"
             type="password"
@@ -80,6 +92,7 @@ export default function SignIn({ handleClickOpenSignUp }) {
             fullWidth
             variant="contained"
             color="primary"
+            onClick={handleSignIn}
             className={classes.submit}
           >
             Sign In
