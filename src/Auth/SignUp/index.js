@@ -1,15 +1,14 @@
 import React from 'react';
 
 import { Button } from './../../Landing Page/Component/ButtonElement';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux';
 
 import SignUpContent from './SignUpContent';
+import { signup } from '../../Redux/actions';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -31,6 +30,19 @@ export default function SignUp({
     handleClickOpenSignIn();
   };
 
+  const dispatch = useDispatch();
+
+  const registerUser = (firstName, lastName, email, password) => {
+    const user = {
+      firstName,
+      lastName,
+      password,
+      email,
+    };
+
+    dispatch(signup(user));
+  };
+
   return (
     <Dialog
       open={open}
@@ -38,7 +50,10 @@ export default function SignUp({
       aria-labelledby="form-dialog-title"
     >
       <DialogContent className={classes.container}>
-        <SignUpContent handleClickOpenSignUp={handleCloseAndOpen} />
+        <SignUpContent
+          handleClickOpenSignUp={handleCloseAndOpen}
+          registerUser={registerUser}
+        />
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './Component/Navbar';
 import { Sidebar } from './Component/Sidebar';
 import HeroSection from './Component/HeroSection';
@@ -12,6 +12,8 @@ import Services from './Component/Services';
 import Footer from './Component/Footer';
 import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp';
+import { useSelector, useDispatch } from 'react-redux';
+import { isLoggedInUser } from '../Redux/actions';
 
 function LandingPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +41,15 @@ function LandingPage() {
   const handleCloseSignUp = () => {
     setOpenSignUp(false);
   };
+
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!auth.authenticated) {
+      dispatch(isLoggedInUser());
+    }
+  }, []);
 
   return (
     <div>
