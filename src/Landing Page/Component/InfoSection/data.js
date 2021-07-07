@@ -3,7 +3,7 @@ export const landingObjOne = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: 'Best Text',
+  topLine: 'sadfsadfsadfasfesfaefaesfaefewrf',
   headline: 'Easy to use and its free',
   description:
     'Get access to our cutting edge magamennt system techoloogy for free without any hidden fees',
