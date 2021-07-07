@@ -37,16 +37,10 @@ const Services = () => {
           <ServicesIcon src={Icon3} />
           <ServicesH2>Some Benefits</ServicesH2>
           <ServicesP>
-            We help you get a better book and incrtease your income
+            We help you get a bsadfasdfasdfasdfadsfasdfsadfasdetter book and incrtease your income
           </ServicesP>
         </ServicesCard>
-        <ServicesCard>
-          <ServicesIcon src={Icon3} />
-          <ServicesH2>Some Benefits</ServicesH2>
-          <ServicesP>
-            We help you get a better book and incrtease your income
-          </ServicesP>
-        </ServicesCard>
+  
       </ServicesWrapper>
     </ServicesContainer>
   );
