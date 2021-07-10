@@ -10,9 +10,9 @@ import {
   ServicesP,
 } from './ServicesElements';
 
-import Icon1 from '../../../resources/landing/images/svg1.svg';
-import Icon2 from '../../../resources/landing/images/svg1.svg';
-import Icon3 from '../../../resources/landing/images/svg1.svg';
+import Icon1 from '../../../resources/landing/images/books4.jpeg';
+import Icon2 from '../../../resources/landing/images/books5.jpg';
+import Icon3 from '../../../resources/landing/images/books6.jpg';
 
 const Services = () => {
   return (
@@ -21,23 +21,23 @@ const Services = () => {
       <ServicesWrapper>
         <ServicesCard>
           <ServicesIcon src={Icon1} />
-          <ServicesH2>Reduce expenses</ServicesH2>
+          <ServicesH2>Get a library card</ServicesH2>
           <ServicesP>
-            We help you get a better book and incrtease your income
+            It's free and easy to get access to our library. Just signup for a new acccount.
           </ServicesP>
         </ServicesCard>
         <ServicesCard>
           <ServicesIcon src={Icon2} />
-          <ServicesH2>Virtual Offices</ServicesH2>
+          <ServicesH2>Search Catalog</ServicesH2>
           <ServicesP>
-            We help you get a better book and incrtease your income
+            Already have an account? Sign in to access our library and find a book.
           </ServicesP>
         </ServicesCard>
         <ServicesCard>
           <ServicesIcon src={Icon3} />
-          <ServicesH2>Some Benefits</ServicesH2>
+          <ServicesH2>Renew Book</ServicesH2>
           <ServicesP>
-            We help you get a bsadfasdfasdfasdfadsfasdfsadfasdetter book and incrtease your income
+            Looking to keep the book you already have checked out? Renew your book now.
           </ServicesP>
         </ServicesCard>
   
