@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LandingPage from './Landing Page';
 import SignIn from './Auth/SignIn';
 
@@ -11,7 +11,14 @@ import {
 
 import './App.css';
 import PrivateRoute from './PrivateRoute';
-import Home from './Dashboard/Home';
+import Home from './Dashboard/pages/Home/Home';
+import Search from './Dashboard/pages/Search/Search';
+import Topbar from './Dashboard/Component/Topbar';
+import Sidebar from './Dashboard/Component/sidebar/Sidebar';
+
+import './App.css';
+import Dashboard from './Dashboard';
+import Switcher from './Dashboard/pages/Switcher';
 
 function App() {
   const user = localStorage.getItem('user')
@@ -20,13 +27,9 @@ function App() {
 
   return (
     <Router>
+      {localStorage.getItem('user') ? <Switcher data={user} /> : null}
       <Switch>
-        <PrivateRoute path="/home" component={Home} />
-        {user ? (
-          <Redirect to="/home" />
-        ) : (
-          <Route path="/" component={LandingPage} exact />
-        )}
+        <Route path="/" component={LandingPage} exact />
       </Switch>
     </Router>
   );
