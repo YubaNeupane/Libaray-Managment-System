@@ -91,7 +91,6 @@ export default function SignIn({ handleClickOpenSignUp, signInUser }) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
             onClick={handleSignIn}
             className={classes.submit}
           >

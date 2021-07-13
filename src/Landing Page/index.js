@@ -9,11 +9,12 @@ import {
   landingObjThree,
 } from './Component/InfoSection/data';
 import Services from './Component/Services';
-import Footer from './Component/Footer';
 import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp';
 import { useSelector, useDispatch } from 'react-redux';
 import { isLoggedInUser } from '../Redux/actions';
+
+import Footer from './Component/Footer/index';
 
 function LandingPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +86,7 @@ function LandingPage() {
         handleClickOpen={handleClickOpenSignUp}
         {...landingObjThree}
       />
-      <h1>Footer </h1>
+      <Footer />
     </div>
   );
 }
