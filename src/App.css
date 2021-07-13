@@ -3,3 +3,12 @@
   margin: 0;
   font-family: 'Encode Sans Expanded', sans-serif;
 }
+
+.container {
+  display: flex;
+  margin-top: 10px;
+}
+
+.others {
+  flex: 6;
+}

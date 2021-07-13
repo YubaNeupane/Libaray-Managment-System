@@ -51,6 +51,7 @@ export const signup = (user) => {
                   type: `${authConstant.USER_LOGIN}_FAILURE`,
                   payload: { error },
                 });
+                window.location.reload();
               });
           });
       })
@@ -90,6 +91,7 @@ export const signin = (user) => {
           type: `${authConstant.USER_LOGIN}_SUCCESS`,
           payload: { user: loggedInUser },
         });
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -112,6 +114,7 @@ export const isLoggedInUser = () => {
         type: `${authConstant.USER_LOGIN}_SUCCESS`,
         payload: { user: user },
       });
+      window.location.reload();
     } else {
       dispatch({
         type: `${authConstant.USER_LOGIN}_FAILURE`,
