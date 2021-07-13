@@ -51,7 +51,7 @@ export default function TopMenu({ userData }) {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Setting</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </div>

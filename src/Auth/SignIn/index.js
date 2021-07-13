@@ -11,6 +11,8 @@ import SignInContent from './SignInContent';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../../Redux/actions';
 import { Redirect } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -27,6 +29,17 @@ export default function SignIn({
 }) {
   const classes = useStyles();
 
+  const notify = (m) =>
+    toast.error(m, {
+      position: 'bottom-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   const handleCloseAndOpen = () => {
     handleClose();
     handleClickOpenSignUp();
@@ -36,11 +49,11 @@ export default function SignIn({
 
   const signInUser = (email, password) => {
     if (email == '') {
-      alert('Email is required!');
+      notify('Email field is empty!');
       return;
     }
     if (password == '') {
-      alert('Password is required!');
+      notify('Password field is empty!');
       return;
     }
     const user = {
@@ -49,6 +62,7 @@ export default function SignIn({
     };
 
     dispatch(signin(user));
+    notify('Login Failed! Try again...');
   };
 
   const auth = useSelector((state) => state.auth);
@@ -63,6 +77,18 @@ export default function SignIn({
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
       <DialogContent className={classes.container}>
         <SignInContent
           handleClose={handleClose}

@@ -24,7 +24,7 @@ export default function Topbar({ userData }) {
     <div className="topbar">
       <div className="topBarWrapper">
         <div className="topLeft">
-          <span className="logo">Management</span>
+          <span className="logo">Super Library Management</span>
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">
