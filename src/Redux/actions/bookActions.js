@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import { bookAddingConstant } from './constants';
 
-export const addBook = (bookData) => {
+export const addBook = (bookData, callBack) => {
   return async (dispatch) => {
     const db = firebase.firestore();
 
@@ -20,14 +20,15 @@ export const addBook = (bookData) => {
     bookRef
       .set(bookData)
       .then((data) => {
-        console.log(data);
+        callBack('Book added successfully!');
+
         dispatch({
           type: bookAddingConstant.ADDING_BOOK_SUCCESS,
           payload: { book: bookData },
         });
       })
       .catch((e) => {
-        console.log(e.messages);
+        callBack(e.messages);
         dispatch({
           type: bookAddingConstant.ADDING_BOOK_FAILED,
           payload: { error: e },
