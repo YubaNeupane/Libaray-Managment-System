@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddBookForm() {
+export default function AddBookForm(props) {
   const classes = useStyles();
 
   return (
@@ -61,6 +61,8 @@ export default function AddBookForm() {
             fullWidth
             label="Book"
             name="book"
+            value={props.bookName}
+            onChange={(e) => props.setBookName(e.target.value)}
             autoFocus
           />
           <TextField
@@ -69,6 +71,8 @@ export default function AddBookForm() {
             required
             fullWidth
             label="Author"
+            value={props.aurthor}
+            onChange={(e) => props.setAurthor(e.target.value)}
             name="author"
           />
           <TextField
@@ -77,6 +81,8 @@ export default function AddBookForm() {
             required
             fullWidth
             label="ISBN"
+            value={props.isbn}
+            onChange={(e) => props.setIsbn(e.target.value)}
             name="ISBN"
           />
           <TextField
@@ -86,6 +92,8 @@ export default function AddBookForm() {
             fullWidth
             type="number"
             label="Quantity"
+            value={props.quantity}
+            onChange={(e) => props.setQuantity(e.target.value)}
             name="quantity"
           />
           <TextField
@@ -94,6 +102,8 @@ export default function AddBookForm() {
             margin="normal"
             name="preface"
             multiline
+            value={props.preface}
+            onChange={(e) => props.setPreface(e.target.value)}
             fullWidth
             variant="filled"
           />
@@ -103,6 +113,8 @@ export default function AddBookForm() {
             required
             fullWidth
             label="Image Url"
+            value={props.imageUrl}
+            onChange={(e) => props.setImageUrl(e.target.value)}
             name="url"
           />
 
@@ -113,6 +125,7 @@ export default function AddBookForm() {
             fullWidth
             className={classes.submit}
             startIcon={<MdAddCircle />}
+            onClick={props.handleAdding}
           >
             ADD
           </Button>
