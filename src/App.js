@@ -27,10 +27,13 @@ function App() {
 
   return (
     <Router>
-      {localStorage.getItem('user') ? <Switcher data={user} /> : null}
-      <Switch>
-        <Route path="/" component={LandingPage} exact />
-      </Switch>
+      {localStorage.getItem('user') ? (
+        <Switcher data={user} />
+      ) : (
+        <Switch>
+          <Route path="/" component={LandingPage} exact />
+        </Switch>
+      )}
     </Router>
   );
 }

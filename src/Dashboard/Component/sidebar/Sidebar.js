@@ -21,6 +21,9 @@ import Topbar from '../Topbar';
 import Home from '../../pages/Home/Home';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import PeopleIcon from '@material-ui/icons/People';
 
 const drawerWidth = 240;
 
@@ -160,6 +163,38 @@ export default function MiniDrawer({ userData }) {
             </ListItemIcon>
             <ListItemText primary="Search" />
           </ListItem>
+          <Divider />
+          {userData.isLibrarian ? (
+            <List>
+              <ListItem button component="a" href="/addBook">
+                <ListItemIcon>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Add Book" />
+              </ListItem>
+              <ListItem button component="a" href="/editBook">
+                <ListItemIcon>
+                  <EditIcon />
+                </ListItemIcon>
+                <ListItemText primary="Edit Book" />
+              </ListItem>
+              <ListItem button component="a" href="/manageUser">
+                <ListItemIcon>
+                  <PeopleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Manage User" />
+              </ListItem>
+            </List>
+          ) : null}
+
+          {userData.isAdmin ? (
+            <ListItem button component="a" href="/manageUser">
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Manage User" />
+            </ListItem>
+          ) : null}
 
           {/* {['Home', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
@@ -170,7 +205,6 @@ export default function MiniDrawer({ userData }) {
             </ListItem>
           ))} */}
         </List>
-        <Divider />
         {/* <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem button key={text}>

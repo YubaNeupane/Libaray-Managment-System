@@ -9,15 +9,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home() {
+export default function Home({ userData }) {
   const classes = useStyles();
 
   return (
     <main className={classes.content}>
+      <h1>
+        Hello, {userData.firstName} {userData.lastName}
+      </h1>
+      {/* <FeaturedInfo />
       <FeaturedInfo />
       <FeaturedInfo />
-      <FeaturedInfo />
-      <FeaturedInfo />
+      <FeaturedInfo /> */}
     </main>
   );
 }

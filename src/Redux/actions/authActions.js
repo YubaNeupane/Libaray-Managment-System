@@ -23,27 +23,55 @@ export const signup = (user) => {
           .then(() => {
             //if you are here means it is updated display name sussfully
             db.collection('users')
-              .add({
+              .doc(data.user.uid)
+              .set({
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
                 uid: data.user.uid,
                 createdAt: new Date(),
+                isAdmin: false,
+                isLibrarian: false,
+                isUser: true,
+                borrowedBooks: [],
               })
               .then(() => {
                 //succeful
-                const loggedInUser = {
-                  firstName: user.firstName,
-                  lastName: user.lastName,
-                  email: user.email,
-                  uid: data.user.uid,
-                };
-                localStorage.setItem('user', JSON.stringify(loggedInUser));
-                console.log('User logged in successfully...!');
-                dispatch({
-                  type: `${authConstant.USER_LOGIN}_SUCCESS`,
-                  payload: { user: loggedInUser },
-                });
+
+                db.collection('users')
+                  .doc(data.user.uid)
+                  .get()
+                  .then((doc) => {
+                    if (doc.exists) {
+                      const loggedInUser = {
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        email: user.email,
+                        uid: data.user.uid,
+                        createdAt: doc.data().createdAt,
+                        isAdmin: doc.data().isAdmin,
+                        isLibrarian: doc.data().isLibrarian,
+                        isUser: doc.data().isUser,
+                        borrowedBooks: doc.data().borrowedBooks,
+                      };
+
+                      localStorage.setItem(
+                        'user',
+                        JSON.stringify(loggedInUser)
+                      );
+                      console.log('User logged in successfully...!');
+                      dispatch({
+                        type: `${authConstant.USER_LOGIN}_SUCCESS`,
+                        payload: { user: loggedInUser },
+                      });
+                      console.log(doc);
+                      window.location.reload();
+                    } else {
+                      // doc.data() will be undefined in this case
+                      console.log('No such document!');
+                      //  console.log(doc.data());
+                    }
+                  });
               })
               .catch((error) => {
                 console.log(error);
@@ -51,7 +79,6 @@ export const signup = (user) => {
                   type: `${authConstant.USER_LOGIN}_FAILURE`,
                   payload: { error },
                 });
-                window.location.reload();
               });
           });
       })
@@ -68,30 +95,47 @@ export const signup = (user) => {
 export const signin = (user) => {
   return async (dispatch) => {
     dispatch({ type: `${authConstant.USER_LOGIN}_REQUEST` });
+    const db = firebase.firestore();
 
     firebase
       .auth()
       .signInWithEmailAndPassword(user.email, user.password)
       .then((data) => {
-        console.log(data);
+        console.log(data.user);
         const name = data.user.displayName.split(' ');
         const firstName = name[0];
         const lastName = name[1];
 
-        const loggedInUser = {
-          firstName,
-          lastName,
-          email: data.user.email,
-          uid: data.user.uid,
-        };
+        db.collection('users')
+          .doc(data.user.uid)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              const loggedInUser = {
+                firstName: firstName,
+                lastName: lastName,
+                email: user.email,
+                uid: data.user.uid,
+                createdAt: doc.data().createdAt,
+                isAdmin: doc.data().isAdmin,
+                isLibrarian: doc.data().isLibrarian,
+                isUser: doc.data().isUser,
+                borrowedBooks: doc.data().borrowedBooks,
+              };
 
-        localStorage.setItem('user', JSON.stringify(loggedInUser));
+              localStorage.setItem('user', JSON.stringify(loggedInUser));
 
-        dispatch({
-          type: `${authConstant.USER_LOGIN}_SUCCESS`,
-          payload: { user: loggedInUser },
-        });
-        window.location.reload();
+              dispatch({
+                type: `${authConstant.USER_LOGIN}_SUCCESS`,
+                payload: { user: loggedInUser },
+              });
+              window.location.reload();
+            } else {
+              // doc.data() will be undefined in this case
+              console.log('No such document!');
+              //  console.log(doc.data());
+            }
+          });
       })
       .catch((error) => {
         console.log(error);

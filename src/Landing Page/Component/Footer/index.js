@@ -3,6 +3,7 @@ import React from 'react';
 const FooterPage = () => {
   return (
     <footer style={{ background: 'black' }}>
+      <br />
       <div style={{ textAlign: 'center', color: 'white' }}>
         Made by{'  '}
         <a
@@ -16,6 +17,8 @@ const FooterPage = () => {
         SWENG 411
         <br />
         Super Library Management
+        <br />
+        <br />
       </div>
     </footer>
   );
