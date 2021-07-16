@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import AddBookForm from './AddBookForm';
+import { addBook } from '../../../Redux/actions';
+import { useDispatch } from 'react-redux';
 
 export default function AddBook() {
   const [bookName, setBookName] = useState('');
@@ -8,6 +10,8 @@ export default function AddBook() {
   const [quantity, setQuantity] = useState(null);
   const [preface, setPreface] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleAdding = () => {
     const data = {
@@ -18,7 +22,7 @@ export default function AddBook() {
       preface,
       imageUrl,
     };
-    console.log(data);
+    dispatch(addBook(data));
   };
 
   return (

@@ -2,3 +2,9 @@ export const authConstant = {
   USER_LOGIN: 'USER_LOGIN',
   USER_LOGOUT: 'USER_LOGOUT',
 };
+
+export const bookAddingConstant = {
+  ADDING_BOOK_REQUEST: 'ADDING_BOOK_REQUEST',
+  ADDING_BOOK_SUCCESS: 'ADDING_BOOK_SUCCESS',
+  ADDING_BOOK_FAILED: 'ADDING_BOOK_FAILED',
+};
