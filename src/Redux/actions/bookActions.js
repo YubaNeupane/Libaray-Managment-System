@@ -1,5 +1,9 @@
 import firebase from 'firebase';
-import { bookAddingConstant, bookGettingConstant } from './constants';
+import {
+  bookAddingConstant,
+  bookGettingConstant,
+  editBookConstant,
+} from './constants';
 
 export const addBook = (bookData, callBack) => {
   return async (dispatch) => {
@@ -61,6 +65,43 @@ export const getBook = () => {
         dispatch({
           type: bookGettingConstant.GETTING_BOOK_FAILED,
           payload: e,
+        });
+      });
+  };
+};
+
+export const editBook = (editedData, bookID, callBack, toastCallBack) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+
+    // dispatch({
+    //   type: editBookConstant.EDIT_BOOK_REQUEST,
+    // });
+
+    db.collection('books')
+      .doc(bookID)
+      .set({ ...editedData, lastUpdated: firebase.firestore.Timestamp.now() })
+      .then(() => {
+        console.log('Document successfully written!');
+        getBook();
+
+        dispatch({
+          type: editBookConstant.EDIT_BOOK_SUCCESS,
+        });
+        // callBack();
+        toastCallBack('Successfully edited book!');
+        callBack();
+        setTimeout(function () {
+          window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+        }, 2000); //delayTime should be written in milliseconds e.g. 1000 which equals 1 second
+      })
+      .catch((error) => {
+        console.error('Error writing document: ', error);
+        toastCallBack(error, true);
+
+        dispatch({
+          type: editBookConstant.EDIT_BOOK_FAILED,
+          payload: error,
         });
       });
   };
