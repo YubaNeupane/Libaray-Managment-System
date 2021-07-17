@@ -22,8 +22,8 @@ import Moment from 'react-moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 420,
-    minWidth: 420,
+    maxWidth: 430,
+    minWidth: 430,
   },
   media: {
     paddingTop: '100%',
@@ -57,8 +57,8 @@ export default function CardView({ book }) {
     setExpanded(!expanded);
   };
   const style = {
-    maxWidth: 420,
-    minWidth: 420,
+    maxWidth: 430,
+    minWidth: 430,
     maxHeight: 450,
     minHeight: 450,
   };

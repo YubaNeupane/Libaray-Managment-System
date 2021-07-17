@@ -11,7 +11,7 @@ import Card from './Card';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    paddingLeft: 60,
+    paddingLeft: 40,
     marginTop: 20,
   },
 }));
