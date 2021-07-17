@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -67,12 +67,19 @@ export default function CardView({ book }) {
     let t = new Date(1970, 0, 1);
     t.setSeconds(secs);
     t.setMilliseconds(nano * 0.000001);
-    console.log(t.toLocaleTimeString());
     return t;
   }
 
+  const toggleRaised = () => setMoveOver(!isMouseOver);
+  const [isMouseOver, setMoveOver] = useState(false);
+
   return (
-    <Card className={classes.root}>
+    <Card
+      className={classes.root}
+      raised={isMouseOver}
+      onMouseOver={toggleRaised}
+      onMouseOut={toggleRaised}
+    >
       <CardActionArea>
         <CardHeader
           avatar={
