@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import SignInContent from './SignInContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from '../../Redux/actions';
+import { signin, getBook } from '../../Redux/actions';
 import { Redirect } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -62,6 +62,8 @@ export default function SignIn({
     };
 
     dispatch(signin(user));
+    dispatch(getBook());
+
     notify('Login Failed! Try again...');
   };
 

@@ -1,4 +1,4 @@
-import { bookAddingConstant } from '../actions/constants';
+import { bookAddingConstant, bookGettingConstant } from '../actions/constants';
 
 const initState = {
   bookName: '',
@@ -33,6 +33,12 @@ export default (state = initState, action) => {
         adding: false,
         error: action.payload.error,
       };
+      break;
+    case bookGettingConstant.GETTING_BOOK_REQUEST:
+      break;
+    case bookGettingConstant.GEETING_BOOK_SUCCESS:
+      break;
+    case bookGettingConstant.GETTING_BOOK_FAILED:
       break;
   }
   return state;

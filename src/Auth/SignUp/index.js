@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 
 import SignUpContent from './SignUpContent';
-import { signup } from '../../Redux/actions';
+import { signup, getBook } from '../../Redux/actions';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -41,6 +41,7 @@ export default function SignUp({
     };
 
     dispatch(signup(user));
+    dispatch(getBook());
   };
 
   return (

@@ -28,20 +28,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBar() {
+export default function SearchBar({
+  setSearchValue,
+  searchValue,
+  handleSearch,
+}) {
   const classes = useStyles();
 
   return (
-    <Paper component="form" className={classes.root}>
+    <Paper className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Search Book"
+        placeholder="Search Book, Aurthor, ISBN #, Preface"
         inputProps={{ 'aria-label': 'Search Book' }}
+        value={searchValue}
+        onChange={(e) => {
+          setSearchValue(e.target.value);
+          handleSearch();
+        }}
       />
       <IconButton
-        type="submit"
         className={classes.iconButton}
         aria-label="search"
+        onClick={(e) => handleSearch()}
       >
         <SearchIcon />
       </IconButton>
