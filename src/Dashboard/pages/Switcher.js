@@ -5,6 +5,7 @@ import Sidebar from '../Component/sidebar/Sidebar';
 import Home from './Home/Home';
 import Search from './Search/Search';
 import AddBook from './AddBook/Index';
+import ManageBooks from './Manage Books';
 
 export default function Switcher({ data }) {
   return (
@@ -19,6 +20,9 @@ export default function Switcher({ data }) {
         </Route>
         <Route path="/addBook" exact>
           <AddBook />
+        </Route>
+        <Route path="/manageBooks" exact>
+          <ManageBooks />
         </Route>
       </Switch>
     </Router>

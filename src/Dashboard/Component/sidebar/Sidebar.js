@@ -24,6 +24,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import PeopleIcon from '@material-ui/icons/People';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 const drawerWidth = 240;
 
@@ -172,11 +173,11 @@ export default function MiniDrawer({ userData }) {
                 </ListItemIcon>
                 <ListItemText primary="Add Book" />
               </ListItem>
-              <ListItem button component="a" href="/editBook">
+              <ListItem button component="a" href="/manageBooks">
                 <ListItemIcon>
-                  <EditIcon />
+                  <MenuBookIcon />
                 </ListItemIcon>
-                <ListItemText primary="Edit Book" />
+                <ListItemText primary="Manage Book" />
               </ListItem>
               <ListItem button component="a" href="/manageUser">
                 <ListItemIcon>
