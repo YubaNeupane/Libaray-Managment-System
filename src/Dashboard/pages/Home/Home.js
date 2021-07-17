@@ -17,6 +17,7 @@ export default function Home({ userData }) {
       <h1>
         Hello, {userData.firstName} {userData.lastName}
       </h1>
+
       {/* <FeaturedInfo />
       <FeaturedInfo />
       <FeaturedInfo />

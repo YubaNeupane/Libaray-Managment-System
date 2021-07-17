@@ -6,6 +6,7 @@ import Home from './Home/Home';
 import Search from './Search/Search';
 import AddBook from './AddBook/Index';
 import ManageBooks from './Manage Books';
+import ManageUsers from './ManageUser';
 
 export default function Switcher({ data }) {
   return (
@@ -23,6 +24,9 @@ export default function Switcher({ data }) {
         </Route>
         <Route path="/manageBooks" exact>
           <ManageBooks />
+        </Route>
+        <Route path="/manageUser" exact>
+          <ManageUsers />
         </Route>
       </Switch>
     </Router>
