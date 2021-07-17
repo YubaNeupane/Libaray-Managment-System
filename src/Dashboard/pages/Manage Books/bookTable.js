@@ -58,7 +58,6 @@ export default function CustomizedTables({ books }) {
     let t = new Date(1970, 0, 1);
     t.setSeconds(secs);
     t.setMilliseconds(nano * 0.000001);
-    console.log(t.toLocaleTimeString());
     return t;
   }
 

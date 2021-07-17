@@ -8,6 +8,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { emphasize } from '@material-ui/core';
+import { deleteBook, getBook } from '../../../Redux/actions';
+import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function DeleteModel({ book }) {
   const [open, setOpen] = React.useState(false);
@@ -20,8 +25,43 @@ export default function DeleteModel({ book }) {
     setOpen(false);
   };
 
+  const handleDeleteBook = () => {
+    dispatch(deleteBook(book.id, handleClose, toastCallBack));
+    dispatch(getBook());
+  };
+  const dispatch = useDispatch();
+
+  const toastCallBack = (message, isError = false) => {
+    if (isError) {
+      toast.error(message, {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
+    } else {
+      toast.success(message, {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
+    }
+  };
+
   return (
     <div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <IconButton
         color="secondary"
         aria-label="delete"
@@ -48,7 +88,7 @@ export default function DeleteModel({ book }) {
             NO
           </Button>
           <Button
-            onClick={handleClose}
+            onClick={handleDeleteBook}
             color="secondary"
             variant="contained"
             autoFocus
