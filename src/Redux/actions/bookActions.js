@@ -56,6 +56,8 @@ export const getBook = () => {
 
         querySnapshot.forEach((doc) => {
           data.push(doc.data());
+          console.log(data[data.length - 1]);
+          data[data.length - 1].lastUpdated = doc.data().lastUpdated.toDate();
         });
         localStorage.setItem('books', JSON.stringify(data));
         dispatch({

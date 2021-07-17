@@ -103,16 +103,7 @@ export default function CardView({ book }) {
       </Collapse>
       <CardActions>
         <Chip color="primary" label={`ISBN: ${book.isbn}`} />
-        <Chip
-          label={
-            <Moment toNow>
-              {toDateTime(
-                book.lastUpdated.seconds,
-                book.lastUpdated.nanoseconds
-              )}
-            </Moment>
-          }
-        ></Chip>
+        <Chip label={<Moment fromNow>{book.lastUpdated}</Moment>}></Chip>
 
         <IconButton
           className={clsx(classes.expand, {
