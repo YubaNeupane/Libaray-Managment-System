@@ -10,7 +10,7 @@ import SearchBar from '../Search/SearchBar';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 200,
+    marginTop: 100,
     marginLeft: 200,
   },
 }));

@@ -9,9 +9,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
 import Moment from 'react-moment';
+import EditModel from './editModel';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -99,9 +99,7 @@ export default function CustomizedTables({ books }) {
                 </Moment>
               </StyledTableCell>
               <StyledTableCell align="right">
-                <IconButton color="primary" aria-label="add an alarm">
-                  <EditIcon />
-                </IconButton>
+                <EditModel book={book} />
               </StyledTableCell>
               <StyledTableCell align="right">
                 <IconButton color="secondary" aria-label="add an alarm">
