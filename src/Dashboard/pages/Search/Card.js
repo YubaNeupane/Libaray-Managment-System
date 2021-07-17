@@ -18,11 +18,12 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Chip from '@material-ui/core/Chip';
 import { Divider } from '@material-ui/core';
+import Moment from 'react-moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
-    minWidth: 345,
+    maxWidth: 380,
+    minWidth: 380,
   },
   media: {
     paddingTop: '100%',
@@ -56,11 +57,19 @@ export default function CardView({ book }) {
     setExpanded(!expanded);
   };
   const style = {
-    maxWidth: 345,
-    minWidth: 345,
-    maxHeight: 400,
+    maxWidth: 400,
+    minWidth: 400,
+    maxHeight: 450,
     minHeight: 400,
   };
+
+  function toDateTime(secs, nano) {
+    let t = new Date(1970, 0, 1);
+    t.setSeconds(secs);
+    t.setMilliseconds(nano * 0.000001);
+    console.log(t.toLocaleTimeString());
+    return t;
+  }
 
   return (
     <Card className={classes.root}>
@@ -86,7 +95,17 @@ export default function CardView({ book }) {
         </CardContent>
       </Collapse>
       <CardActions>
-        <Chip label={`ISBN: ${book.isbn}`} />
+        <Chip color="primary" label={`ISBN: ${book.isbn}`} />
+        <Chip
+          label={
+            <Moment toNow>
+              {toDateTime(
+                book.lastUpdated.seconds,
+                book.lastUpdated.nanoseconds
+              )}
+            </Moment>
+          }
+        ></Chip>
 
         <IconButton
           className={clsx(classes.expand, {

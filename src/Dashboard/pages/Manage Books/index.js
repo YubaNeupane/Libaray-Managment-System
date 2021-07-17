@@ -17,7 +17,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ManageBook() {
   const classes = useStyles();
+
+  const [searchValue, setSearchValue] = useState('');
+
   const [books, setBooks] = useState(JSON.parse(localStorage.getItem('books')));
+  const initalBooks = JSON.parse(localStorage.getItem('books'));
+
+  const handleSearch = () => {
+    if (searchValue.length <= 1) {
+      setBooks(initalBooks);
+    } else {
+      setBooks(
+        initalBooks.filter((book) => {
+          return (
+            book.bookName.toLowerCase().includes(searchValue.toLowerCase()) ||
+            book.aurthor.toLowerCase().includes(searchValue.toLowerCase()) ||
+            book.isbn.toLowerCase().includes(searchValue.toLowerCase()) ||
+            book.preface.toLowerCase().includes(searchValue.toLowerCase())
+          );
+        })
+      );
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -35,10 +56,20 @@ export default function ManageBook() {
           </Typography>
         </Grid>
         <Grid item xs={6}>
-          <SearchBar />
+          <SearchBar
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            handleSearch={handleSearch}
+          />
         </Grid>
         <Grid item xs={12}>
-          <BookTable books={books} />
+          {books ? (
+            <BookTable books={books} />
+          ) : (
+            <Typography variant="body" color="black" component="p">
+              NO BOOKS FOUND
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </div>

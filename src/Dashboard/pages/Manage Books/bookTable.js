@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
+import Moment from 'react-moment';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -54,6 +55,14 @@ const useStyles = makeStyles({
 export default function CustomizedTables({ books }) {
   const classes = useStyles();
 
+  function toDateTime(secs, nano) {
+    let t = new Date(1970, 0, 1);
+    t.setSeconds(secs);
+    t.setMilliseconds(nano * 0.000001);
+    console.log(t.toLocaleTimeString());
+    return t;
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -82,7 +91,12 @@ export default function CustomizedTables({ books }) {
               <StyledTableCell align="right">{book.quantity}</StyledTableCell>
               <StyledTableCell align="right">{book.isbn}</StyledTableCell>
               <StyledTableCell align="right">
-                {book.lastUpdated.seconds}
+                <Moment toNow>
+                  {toDateTime(
+                    book.lastUpdated.seconds,
+                    book.lastUpdated.nanoseconds
+                  )}
+                </Moment>
               </StyledTableCell>
               <StyledTableCell align="right">
                 <IconButton color="primary" aria-label="add an alarm">
