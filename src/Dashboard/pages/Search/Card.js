@@ -22,8 +22,8 @@ import Moment from 'react-moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 380,
-    minWidth: 380,
+    maxWidth: 420,
+    minWidth: 420,
   },
   media: {
     paddingTop: '100%',
@@ -57,10 +57,10 @@ export default function CardView({ book }) {
     setExpanded(!expanded);
   };
   const style = {
-    maxWidth: 400,
-    minWidth: 400,
+    maxWidth: 420,
+    minWidth: 420,
     maxHeight: 450,
-    minHeight: 400,
+    minHeight: 450,
   };
 
   function toDateTime(secs, nano) {
@@ -121,7 +121,7 @@ export default function CardView({ book }) {
               [classes.expandOpen]: expanded,
             })}
           >
-            Read Preface
+            Read More
           </Typography>
         </IconButton>
       </CardActions>
