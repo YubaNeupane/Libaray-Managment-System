@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -19,6 +21,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SaveIcon from '@material-ui/icons/Save';
+import { editBook, getBook } from '../../../Redux/actions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import ClearIcon from '@material-ui/icons/Clear';
 
@@ -59,9 +64,55 @@ export default function EditModel({ book }) {
   const [preface, setPreface] = useState(book.preface);
   const [imageUrl, setImageUrl] = useState(book.imageUrl);
 
+  const dispatch = useDispatch();
+
+  const toastCallBack = (message, isError = false) => {
+    if (isError) {
+      toast.error(message, {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
+    } else {
+      toast.success(message, {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
+    }
+  };
+
+  const handleEdit = () => {
+    const bookData = {
+      bookName,
+      aurthor,
+      id: book.id,
+      isbn,
+      quantity,
+      preface,
+      imageUrl,
+    };
+
+    dispatch(editBook(bookData, book.id, handleClose, toastCallBack));
+    dispatch(getBook());
+  };
+
   const classes = useStyles();
   return (
     <div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <IconButton
         color="primary"
         aria-label="add an alarm"
@@ -154,7 +205,7 @@ export default function EditModel({ book }) {
                   <TextField
                     required
                     label="Image Url"
-                    onChange={(e) => imageUrl(e.target.value)}
+                    onChange={(e) => setImageUrl(e.target.value)}
                     name="url"
                     fullWidth
                     value={imageUrl}
@@ -178,6 +229,7 @@ export default function EditModel({ book }) {
                   <Button
                     variant="contained"
                     fullWidth
+                    onClick={handleEdit}
                     color="primary"
                     size="large"
                     className={classes.submit}

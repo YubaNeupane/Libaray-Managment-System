@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -21,7 +21,12 @@ export default function ManageBook() {
   const [searchValue, setSearchValue] = useState('');
 
   const [books, setBooks] = useState(JSON.parse(localStorage.getItem('books')));
-  const initalBooks = JSON.parse(localStorage.getItem('books'));
+  let initalBooks = JSON.parse(localStorage.getItem('books'));
+
+  useEffect(() => {
+    setBooks(JSON.parse(localStorage.getItem('books')));
+    initalBooks = JSON.parse(localStorage.getItem('books'));
+  }, []);
 
   const handleSearch = () => {
     if (searchValue.length <= 1) {
@@ -55,13 +60,14 @@ export default function ManageBook() {
             Manage Books
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} xs={6}>
           <SearchBar
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             handleSearch={handleSearch}
           />
         </Grid>
+
         <Grid item xs={12}>
           {books ? (
             <BookTable books={books} />

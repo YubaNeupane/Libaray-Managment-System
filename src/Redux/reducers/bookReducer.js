@@ -1,4 +1,8 @@
-import { bookAddingConstant, bookGettingConstant } from '../actions/constants';
+import {
+  bookAddingConstant,
+  bookGettingConstant,
+  editBookConstant,
+} from '../actions/constants';
 
 const initState = {
   bookName: '',
@@ -39,6 +43,12 @@ export default (state = initState, action) => {
     case bookGettingConstant.GEETING_BOOK_SUCCESS:
       break;
     case bookGettingConstant.GETTING_BOOK_FAILED:
+      break;
+    case editBookConstant.EDIT_BOOK_REQUEST:
+      break;
+    case editBookConstant.EDIT_BOOK_SUCCESS:
+      break;
+    case editBookConstant.EDIT_BOOK_FAILED:
       break;
   }
   return state;

@@ -58,7 +58,6 @@ export default function CustomizedTables({ books }) {
     let t = new Date(1970, 0, 1);
     t.setSeconds(secs);
     t.setMilliseconds(nano * 0.000001);
-    console.log(t.toLocaleTimeString());
     return t;
   }
 
@@ -90,12 +89,7 @@ export default function CustomizedTables({ books }) {
               <StyledTableCell align="right">{book.quantity}</StyledTableCell>
               <StyledTableCell align="right">{book.isbn}</StyledTableCell>
               <StyledTableCell align="right">
-                <Moment toNow>
-                  {toDateTime(
-                    book.lastUpdated.seconds,
-                    book.lastUpdated.nanoseconds
-                  )}
-                </Moment>
+                <Moment fromNow>{book.lastUpdated}</Moment>
               </StyledTableCell>
               <StyledTableCell align="right">
                 <EditModel book={book} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -22,8 +22,8 @@ import Moment from 'react-moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 380,
-    minWidth: 380,
+    maxWidth: 430,
+    minWidth: 430,
   },
   media: {
     paddingTop: '100%',
@@ -57,22 +57,29 @@ export default function CardView({ book }) {
     setExpanded(!expanded);
   };
   const style = {
-    maxWidth: 400,
-    minWidth: 400,
+    maxWidth: 430,
+    minWidth: 430,
     maxHeight: 450,
-    minHeight: 400,
+    minHeight: 450,
   };
 
   function toDateTime(secs, nano) {
     let t = new Date(1970, 0, 1);
     t.setSeconds(secs);
     t.setMilliseconds(nano * 0.000001);
-    console.log(t.toLocaleTimeString());
     return t;
   }
 
+  const toggleRaised = () => setMoveOver(!isMouseOver);
+  const [isMouseOver, setMoveOver] = useState(false);
+
   return (
-    <Card className={classes.root}>
+    <Card
+      className={classes.root}
+      raised={isMouseOver}
+      onMouseOver={toggleRaised}
+      onMouseOut={toggleRaised}
+    >
       <CardActionArea>
         <CardHeader
           avatar={
@@ -96,16 +103,7 @@ export default function CardView({ book }) {
       </Collapse>
       <CardActions>
         <Chip color="primary" label={`ISBN: ${book.isbn}`} />
-        <Chip
-          label={
-            <Moment toNow>
-              {toDateTime(
-                book.lastUpdated.seconds,
-                book.lastUpdated.nanoseconds
-              )}
-            </Moment>
-          }
-        ></Chip>
+        <Chip label={<Moment fromNow>{book.lastUpdated}</Moment>}></Chip>
 
         <IconButton
           className={clsx(classes.expand, {
@@ -121,7 +119,7 @@ export default function CardView({ book }) {
               [classes.expandOpen]: expanded,
             })}
           >
-            Read Preface
+            Read More
           </Typography>
         </IconButton>
       </CardActions>

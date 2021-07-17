@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -7,6 +7,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
+import { useDispatch } from 'react-redux';
+
+import { getBook } from '../../../Redux/actions';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +40,18 @@ export default function SearchBar({
 }) {
   const classes = useStyles();
 
+  const [isLoading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const refreshData = () => {
+    setLoading(true);
+    dispatch(getBook());
+    setTimeout(function () {
+      setLoading(false);
+      window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+    }, 2000); //delayTime should be written in milliseconds e.g. 1000 which equals 1 second
+  };
+
   return (
     <Paper className={classes.root}>
       <InputBase
@@ -53,6 +70,14 @@ export default function SearchBar({
         onClick={(e) => handleSearch()}
       >
         <SearchIcon />
+      </IconButton>
+
+      <IconButton
+        className={classes.iconButton}
+        aria-label="refresh"
+        onClick={(e) => refreshData()}
+      >
+        {isLoading ? <CircularProgress /> : <RefreshIcon />}
       </IconButton>
     </Paper>
   );
