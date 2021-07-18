@@ -178,7 +178,6 @@ export const logout = () => {
       .then(() => {
         localStorage.clear();
         dispatch({ type: `${authConstant.USER_LOGOUT}_SUCCESS` });
-        window.location.href = '/';
       })
       .error((error) => {
         console.log(error);

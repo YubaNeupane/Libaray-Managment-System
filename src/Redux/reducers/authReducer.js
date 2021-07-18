@@ -43,6 +43,8 @@ export default (state = initState, action) => {
       state = {
         ...initState,
       };
+      window.location.href = '/';
+
       break;
     case `${authConstant.USER_LOGOUT}_FAILURE`:
       state = {
