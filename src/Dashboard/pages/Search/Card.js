@@ -49,9 +49,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CardView({ book }) {
+export default function CardView({ book, display }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+  let show = true;
+  if (display) {
+    show = false;
+  }
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -94,35 +99,39 @@ export default function CardView({ book }) {
           <img src={book.imageUrl} style={style} />
         </CardMedia>
       </CardActionArea>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography variant="body" color="black" component="p">
-            {book.preface}
-          </Typography>
-        </CardContent>
-      </Collapse>
-      <CardActions>
-        <Chip color="primary" label={`ISBN: ${book.isbn}`} />
-        <Chip label={<Moment fromNow>{book.lastUpdated}</Moment>}></Chip>
+      {show ? (
+        <div>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography variant="body" color="black" component="p">
+                {book.preface}
+              </Typography>
+            </CardContent>
+          </Collapse>
+          <CardActions>
+            <Chip color="primary" label={`ISBN: ${book.isbn}`} />
+            <Chip label={<Moment fromNow>{book.lastUpdated}</Moment>}></Chip>
 
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-          <Typography
-            className={clsx(classes.expand2, {
-              [classes.expandOpen]: expanded,
-            })}
-          >
-            Read More
-          </Typography>
-        </IconButton>
-      </CardActions>
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded,
+              })}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+              <Typography
+                className={clsx(classes.expand2, {
+                  [classes.expandOpen]: expanded,
+                })}
+              >
+                Read More
+              </Typography>
+            </IconButton>
+          </CardActions>
+        </div>
+      ) : null}
     </Card>
   );
 }
