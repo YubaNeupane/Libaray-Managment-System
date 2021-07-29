@@ -65,6 +65,9 @@ export const signup = (user) => {
                         payload: { user: loggedInUser },
                       });
                       console.log(doc);
+                      if(loggedInUser.isLibrarian || loggedInUser.isAdmin){
+
+                      }
                       window.location.reload();
                     } else {
                       // doc.data() will be undefined in this case
@@ -124,11 +127,6 @@ export const signin = (user) => {
               };
 
               localStorage.setItem('user', JSON.stringify(loggedInUser));
-
-              dispatch({
-                type: `${authConstant.USER_LOGIN}_SUCCESS`,
-                payload: { user: loggedInUser },
-              });
               window.location.reload();
             } else {
               // doc.data() will be undefined in this case
