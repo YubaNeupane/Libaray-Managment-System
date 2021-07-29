@@ -8,6 +8,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Button } from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Avatar from '@material-ui/core/Avatar';
+import { deepOrange, deepPurple } from '@material-ui/core/colors';
+
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -39,32 +44,47 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
   table: {
     minWidth: 700,
   },
-});
+  orange: {
+    color: theme.palette.getContrastText(deepOrange[500]),
+    backgroundColor: deepOrange[500],
+  },
+}));
 
 export default function UserTable({users}) {
   const classes = useStyles();
 
   return (
     <TableContainer component={Paper}>
-        <Button>Create User</Button>
+          <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        startIcon={<AddCircleIcon />}
+      >
+        Create User
+      </Button>
 
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>UID</StyledTableCell>
-            <StyledTableCell align="right">First Name</StyledTableCell>
-            <StyledTableCell align="right">Last Name</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
+            <StyledTableCell >Cover</StyledTableCell>
+            <StyledTableCell align="left">UID</StyledTableCell>
+            <StyledTableCell align="left">First Name</StyledTableCell>
+            <StyledTableCell align="left">Last Name</StyledTableCell>
+            <StyledTableCell align="left">Email</StyledTableCell>
             {/* <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
           {users.map((user) => (
             <StyledTableRow key={user.uid}>
+               <StyledTableCell component="th" scope="row">
+               <Avatar className={classes.orange}>{user.firstName[0]}</Avatar>
+              </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {user.uid}
               </StyledTableCell>
