@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Button } from '@material-ui/core';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -44,31 +45,33 @@ const useStyles = makeStyles({
   },
 });
 
-export default function UserTable() {
+export default function UserTable({users}) {
   const classes = useStyles();
 
   return (
     <TableContainer component={Paper}>
+        <Button>Create User</Button>
+
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>UID</StyledTableCell>
+            <StyledTableCell align="right">First Name</StyledTableCell>
+            <StyledTableCell align="right">Last Name</StyledTableCell>
+            <StyledTableCell align="right">Email</StyledTableCell>
+            {/* <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {users.map((user) => (
+            <StyledTableRow key={user.uid}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {user.uid}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{user.firstName}</StyledTableCell>
+              <StyledTableCell align="right">{user.lastName}</StyledTableCell>
+              <StyledTableCell align="right">{user.email}</StyledTableCell>
+              {/* <StyledTableCell align="right">{user.protein}</StyledTableCell> */}
             </StyledTableRow>
           ))}
         </TableBody>
