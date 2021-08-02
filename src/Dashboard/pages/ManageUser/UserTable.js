@@ -7,6 +7,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Button } from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Avatar from '@material-ui/core/Avatar';
+import { deepOrange, deepPurple } from '@material-ui/core/colors';
+
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -38,37 +44,54 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
   table: {
     minWidth: 700,
   },
-});
+  orange: {
+    color: theme.palette.getContrastText(deepOrange[500]),
+    backgroundColor: deepOrange[500],
+  },
+}));
 
-export default function UserTable() {
+export default function UserTable({users}) {
   const classes = useStyles();
 
   return (
     <TableContainer component={Paper}>
+          <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        startIcon={<AddCircleIcon />}
+      >
+        Create User
+      </Button>
+
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell >Cover</StyledTableCell>
+            <StyledTableCell align="left">UID</StyledTableCell>
+            <StyledTableCell align="left">First Name</StyledTableCell>
+            <StyledTableCell align="left">Last Name</StyledTableCell>
+            <StyledTableCell align="left">Email</StyledTableCell>
+            {/* <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
+          {users.map((user) => (
+            <StyledTableRow key={user.uid}>
+               <StyledTableCell component="th" scope="row">
+               <Avatar className={classes.orange}>{user.firstName[0]}</Avatar>
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell component="th" scope="row">
+                {user.uid}
+              </StyledTableCell>
+              <StyledTableCell align="right">{user.firstName}</StyledTableCell>
+              <StyledTableCell align="right">{user.lastName}</StyledTableCell>
+              <StyledTableCell align="right">{user.email}</StyledTableCell>
+              {/* <StyledTableCell align="right">{user.protein}</StyledTableCell> */}
             </StyledTableRow>
           ))}
         </TableBody>

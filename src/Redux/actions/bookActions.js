@@ -15,7 +15,6 @@ export const addBook = (bookData, callBack) => {
     });
 
     const bookRef = db.collection('books').doc();
-    console.log(bookRef);
     bookData = {
       ...bookData,
       id: bookRef.id,
