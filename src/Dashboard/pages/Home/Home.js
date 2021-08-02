@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Carousel from './Carousel';
 import { Typography } from '@material-ui/core';
+import BorrowedBookTable from './BorrowedBookTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,13 +31,19 @@ export default function Home({ userData }) {
             RECENTLY ADDED
           </Typography>
           <br />
-          <Carousel />
+          <Paper className={classes.paper}>
+            <Carousel />
+          </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
+          <Paper className={classes.paper}>
+            <BorrowedBookTable />
+          </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
+          <Paper className={classes.paper}>
+            <BorrowedBookTable />
+          </Paper>
         </Grid>
         <Grid item xs={3}>
           <Paper className={classes.paper}>xs=3</Paper>

@@ -13,7 +13,11 @@ export default function Slider() {
   });
 
   return (
-    <Carousel breakPoints={breakPoints}>
+    <Carousel
+      breakPoints={breakPoints}
+      outerSpacing={100}
+      enableMouseSwipe={true}
+    >
       {newBook.slice(0, 7).map((book) => (
         <Grid key={book.id} item spacing={50}>
           <Card book={book} display={true} />
