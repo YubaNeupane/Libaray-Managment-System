@@ -165,7 +165,7 @@ export default function MiniDrawer({ userData }) {
             <ListItemText primary="Search" />
           </ListItem>
           <Divider />
-          {userData.isLibrarian ? (
+          {userData.isLibrarian || userData.isAdmin ? (
             <List>
               <ListItem button component="a" href="/addBook">
                 <ListItemIcon>
@@ -188,14 +188,14 @@ export default function MiniDrawer({ userData }) {
             </List>
           ) : null}
 
-          {userData.isAdmin ? (
+          {/* {userData.isAdmin ? (
             <ListItem button component="a" href="/manageUser">
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="Manage User" />
             </ListItem>
-          ) : null}
+          ) : null} */}
 
           {/* {['Home', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>

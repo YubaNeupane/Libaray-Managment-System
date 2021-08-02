@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -19,6 +19,10 @@ export default function ManageBook() {
   const [searchValue, setSearchValue] = useState('');
 
   const [users, setUsers] = useState(JSON.parse(localStorage.getItem('users')));
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem('user'))
+  );
+
   let initUsers = JSON.parse(localStorage.getItem('users'));
 
   useEffect(() => {
@@ -51,12 +55,13 @@ export default function ManageBook() {
         </Grid>
 
         <Grid item xs={12}>
-          {users? <UserTable users={users}/> :
-          <Typography variant="body" color="black" component="p">
-            NO USERS FOUND
-          </Typography>}
-   
-          
+          {users ? (
+            <UserTable users={users} currentUser={currentUser} />
+          ) : (
+            <Typography variant="body" color="black" component="p">
+              NO USERS FOUND
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </div>

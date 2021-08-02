@@ -11,8 +11,8 @@ import { Button } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
-
-
+import MoreInfoModel from './MoreInfoModel';
+import EditUserModel from './EditUserModel';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -44,7 +44,7 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 700,
   },
@@ -54,12 +54,12 @@ const useStyles = makeStyles((theme)=>({
   },
 }));
 
-export default function UserTable({users}) {
+export default function UserTable({ users, currentUser }) {
   const classes = useStyles();
 
   return (
     <TableContainer component={Paper}>
-          <Button
+      <Button
         variant="contained"
         color="primary"
         className={classes.button}
@@ -71,27 +71,38 @@ export default function UserTable({users}) {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell >Cover</StyledTableCell>
+            <StyledTableCell>Cover</StyledTableCell>
             <StyledTableCell align="left">UID</StyledTableCell>
             <StyledTableCell align="left">First Name</StyledTableCell>
             <StyledTableCell align="left">Last Name</StyledTableCell>
             <StyledTableCell align="left">Email</StyledTableCell>
+            <StyledTableCell align="left">More Info</StyledTableCell>
+            {currentUser.isAdmin ? (
+              <StyledTableCell align="left">Edit User</StyledTableCell>
+            ) : null}
             {/* <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
           {users.map((user) => (
             <StyledTableRow key={user.uid}>
-               <StyledTableCell component="th" scope="row">
-               <Avatar className={classes.orange}>{user.firstName[0]}</Avatar>
+              <StyledTableCell component="th" scope="row">
+                <Avatar className={classes.orange}>{user.firstName[0]}</Avatar>
               </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {user.uid}
               </StyledTableCell>
-              <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-              <StyledTableCell align="right">{user.lastName}</StyledTableCell>
-              <StyledTableCell align="right">{user.email}</StyledTableCell>
-              {/* <StyledTableCell align="right">{user.protein}</StyledTableCell> */}
+              <StyledTableCell align="left">{user.firstName}</StyledTableCell>
+              <StyledTableCell align="left">{user.lastName}</StyledTableCell>
+              <StyledTableCell align="left">{user.email}</StyledTableCell>
+              <StyledTableCell align="left">
+                <MoreInfoModel />
+              </StyledTableCell>
+              {currentUser.isAdmin ? (
+                <StyledTableCell align="left">
+                  <EditUserModel user={user} />
+                </StyledTableCell>
+              ) : null}
             </StyledTableRow>
           ))}
         </TableBody>
