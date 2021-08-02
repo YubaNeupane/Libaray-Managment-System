@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Carousel from './Carousel';
 import { Typography } from '@material-ui/core';
 import BorrowedBookTable from './BorrowedBookTable';
+import DatePicker from './DatePicker';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,12 +27,20 @@ export default function Home({ userData }) {
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
+        {userData.isLibrarian ? (
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <DatePicker />
+            </Paper>
+          </Grid>
+        ) : null}
         <Grid item xs={12}>
-          <Typography variant="h4" component="h4">
-            RECENTLY ADDED
-          </Typography>
-          <br />
           <Paper className={classes.paper}>
+            <Typography variant="h4" component="h4">
+              RECENTLY ADDED
+            </Typography>
+            <br />
+
             <Carousel />
           </Paper>
         </Grid>
