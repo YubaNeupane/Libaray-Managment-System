@@ -2,6 +2,12 @@ import 'date-fns';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setReturnDate,
+  getReturnDate,
+} from '../../../Redux/actions/manageUserActions';
+
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -10,10 +16,19 @@ import {
 
 export default function MaterialUIPickers() {
   // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const dispatch = useDispatch();
+
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date(JSON.parse(localStorage.getItem('returnDate')).returnDate)
+  );
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    dispatch(setReturnDate(date.toDateString(), getDate));
+  };
+
+  const getDate = () => {
+    dispatch(getReturnDate());
+    window.location.reload();
   };
 
   return (

@@ -40,7 +40,6 @@ export default function Home({ userData }) {
               RECENTLY ADDED
             </Typography>
             <br />
-
             <Carousel />
           </Paper>
         </Grid>

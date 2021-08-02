@@ -42,6 +42,7 @@ export default function SignUp({
 
     dispatch(signup(user));
     dispatch(getBook());
+    dispatch(getReturnDate());
   };
 
   return (
