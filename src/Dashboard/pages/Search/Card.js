@@ -19,6 +19,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Chip from '@material-ui/core/Chip';
 import { Divider } from '@material-ui/core';
 import Moment from 'react-moment';
+import BorrowBookModel from '../../BorrowBook/BorrowBookModel';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +54,16 @@ export default function CardView({ book, display }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
+  const [borrowBookOpen, setBorrowBookOpen] = React.useState(false);
+
+  const handleBorrowBookOpen = () => {
+    setBorrowBookOpen(true);
+  };
+
+  const handleBorrowBookClose = () => {
+    setBorrowBookOpen(false);
+  };
+
   let show = true;
   if (display) {
     show = false;
@@ -85,7 +96,7 @@ export default function CardView({ book, display }) {
       onMouseOver={toggleRaised}
       onMouseOut={toggleRaised}
     >
-      <CardActionArea>
+      <CardActionArea onClick={handleBorrowBookOpen}>
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
@@ -132,6 +143,11 @@ export default function CardView({ book, display }) {
           </CardActions>
         </div>
       ) : null}
+      <BorrowBookModel
+        open={borrowBookOpen}
+        handleClose={handleBorrowBookClose}
+        book={book}
+      />
     </Card>
   );
 }
