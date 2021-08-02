@@ -4,6 +4,8 @@ import {
   bookGettingConstant,
   editBookConstant,
   deleteBookConstant,
+  borrowBookConstant,
+  lowerBookQuanityConstant,
 } from './constants';
 
 export const addBook = (bookData, callBack) => {
@@ -139,6 +141,71 @@ export const deleteBook = (bookID, callBack, toastCallBack) => {
         dispatch({
           type: deleteBookConstant.DELETE_BOOK_FAILED,
           payload: error,
+        });
+      });
+  };
+};
+
+export const borrowBook = (
+  bookId,
+  currentBorrowBooks,
+  user,
+  callBack,
+  returnDate
+) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+    dispatch({
+      type: borrowBookConstant.BORROW_BOOK_REQUEST,
+    });
+
+    const d = {
+      bookId: bookId,
+      returnDate: returnDate,
+    };
+
+    const data = [...currentBorrowBooks, d];
+
+    db.collection('users')
+      .doc(user)
+      .update({
+        borrowedBooks: [...data],
+      })
+      .then(() => {
+        dispatch({
+          type: borrowBookConstant.BORROW_BOOK_SUCCESS,
+        });
+        callBack();
+      })
+      .catch((error) => {
+        dispatch({
+          type: borrowBookConstant.BORROW_BOOK_FAILED,
+        });
+      });
+  };
+};
+
+export const lowerBookQuanity = (bookId, currentQuanity) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+    dispatch({
+      type: lowerBookQuanityConstant.LOWER_BOOK_QUANITY_REQUEST,
+    });
+
+    db.collection('books')
+      .doc(bookId)
+      .update({
+        quantity: (parseInt(currentQuanity) - 1).toString(),
+      })
+      .then(() => {
+        console.log((parseInt(currentQuanity) - 1).toString());
+        dispatch({
+          type: lowerBookQuanityConstant.LOWER_BOOK_QUANITY_SUCCESS,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: lowerBookQuanityConstant.LOWER_BOOK_QUANITY_FAILED,
         });
       });
   };

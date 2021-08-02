@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 
 import SignUpContent from './SignUpContent';
-import { signup, getBook } from '../../Redux/actions';
+import { signup, getBook, getReturnDate } from '../../Redux/actions';
 
 const useStyles = makeStyles((theme) => ({
   container: {

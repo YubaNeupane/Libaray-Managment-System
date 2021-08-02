@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { authConstant } from './constants';
+import { authConstant, getUserDataConstant } from './constants';
 
 export const signup = (user) => {
   return async (dispatch) => {
@@ -65,8 +65,7 @@ export const signup = (user) => {
                         payload: { user: loggedInUser },
                       });
                       console.log(doc);
-                      if(loggedInUser.isLibrarian || loggedInUser.isAdmin){
-
+                      if (loggedInUser.isLibrarian || loggedInUser.isAdmin) {
                       }
                       window.location.reload();
                     } else {
@@ -91,6 +90,39 @@ export const signup = (user) => {
           type: `${authConstant.USER_LOGIN}_FAILURE`,
           payload: { error },
         });
+      });
+  };
+};
+
+export const getCurrentUserData = (userUID, currentData) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+    dispatch({ type: getUserDataConstant.GET_USER_REQUEST });
+
+    db.collection('users')
+      .doc(userUID)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          const loggedInUser = {
+            firstName: currentData.firstName,
+            lastName: currentData.lastName,
+            email: currentData.email,
+            uid: currentData.uid,
+            createdAt: doc.data().createdAt,
+            isAdmin: doc.data().isAdmin,
+            isLibrarian: doc.data().isLibrarian,
+            isUser: doc.data().isUser,
+            borrowedBooks: doc.data().borrowedBooks,
+          };
+          dispatch({ type: getUserDataConstant.GET_USER_SUCCESS });
+
+          localStorage.setItem('user', JSON.stringify(loggedInUser));
+          window.location.reload();
+        }
+      })
+      .catch((e) => {
+        dispatch({ type: getUserDataConstant.GET_USER_FAILED });
       });
   };
 };

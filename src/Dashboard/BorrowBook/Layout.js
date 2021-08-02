@@ -43,6 +43,14 @@ export default function Layout({ book }) {
           Quantity
           <Paper className={classes.paper}>{book.quantity}</Paper>
         </Grid>
+        <Grid item xs={12}>
+          Return Date
+          <Paper className={classes.paper}>
+            <Typography color="textPrimary">
+              {JSON.parse(localStorage.getItem('returnDate')).returnDate}
+            </Typography>
+          </Paper>
+        </Grid>
       </Grid>
     </div>
   );

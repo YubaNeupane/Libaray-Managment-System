@@ -1,4 +1,4 @@
-import { authConstant } from '../actions/constants';
+import { authConstant, getUserDataConstant } from '../actions/constants';
 
 const initState = {
   firstName: '',
@@ -51,6 +51,13 @@ export default (state = initState, action) => {
         ...state,
         error: action.payload.error,
       };
+      break;
+
+    case getUserDataConstant.GET_USER_REQUEST:
+      break;
+    case getUserDataConstant.GET_USER_SUCCESS:
+      break;
+    case getUserDataConstant.GET_USER_FAILED:
       break;
   }
   return state;

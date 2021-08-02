@@ -2,6 +2,8 @@ import {
   bookAddingConstant,
   bookGettingConstant,
   editBookConstant,
+  borrowBookConstant,
+  lowerBookQuanityConstant,
 } from '../actions/constants';
 
 const initState = {
@@ -49,6 +51,20 @@ export default (state = initState, action) => {
     case editBookConstant.EDIT_BOOK_SUCCESS:
       break;
     case editBookConstant.EDIT_BOOK_FAILED:
+      break;
+
+    case borrowBookConstant.BORROW_BOOK_REQUEST:
+      break;
+    case borrowBookConstant.BORROW_BOOK_SUCCESS:
+      break;
+    case borrowBookConstant.BORROW_BOOK_FAILED:
+      break;
+
+    case lowerBookQuanityConstant.LOWER_BOOK_QUANITY_REQUEST:
+      break;
+    case lowerBookQuanityConstant.LOWER_BOOK_QUANITY_SUCCESS:
+      break;
+    case lowerBookQuanityConstant.LOWER_BOOK_QUANITY_FAILED:
       break;
   }
   return state;
