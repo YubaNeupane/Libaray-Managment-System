@@ -81,6 +81,10 @@ export const setReturnDate = (newDate, callBack) => {
         dispatch({
           type: setReturnDateConstant.SET_RETURN_DATE_SUCCESS,
         });
+        localStorage.setItem(
+          'returnDate',
+          JSON.stringify({ returnDate: newDate })
+        );
         callBack();
       })
       .catch((error) => {

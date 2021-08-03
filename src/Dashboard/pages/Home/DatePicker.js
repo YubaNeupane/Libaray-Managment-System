@@ -24,6 +24,7 @@ export default function MaterialUIPickers() {
 
   const handleDateChange = (date) => {
     dispatch(setReturnDate(date.toDateString(), getDate));
+    dispatch(setReturnDate(date.toDateString(), getDate));
   };
 
   const getDate = () => {

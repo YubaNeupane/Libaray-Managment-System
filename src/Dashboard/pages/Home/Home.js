@@ -6,6 +6,7 @@ import Carousel from './Carousel';
 import { Typography } from '@material-ui/core';
 import BorrowedBookTable from './BorrowedBookTable';
 import DatePicker from './DatePicker';
+import ReserveBookTable from './ReserveBookTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +53,12 @@ export default function Home({ userData }) {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>{/* <BorrowedBookTable /> */}</Paper>
+          <Paper className={classes.paper}>
+            <Typography variant="h4" component="h4">
+              Currently Reserving
+            </Typography>
+            <ReserveBookTable userData={userData} />
+          </Paper>
         </Grid>
       </Grid>
     </div>
