@@ -77,7 +77,7 @@ export default function FullScreenDialog({ user }) {
         </AppBar>
         <List>
           <ListItem>
-            <InfoLayout />
+            <InfoLayout user={user} />
           </ListItem>
         </List>
       </Dialog>

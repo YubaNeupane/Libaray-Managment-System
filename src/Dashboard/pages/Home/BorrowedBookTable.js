@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import LibrarianBookTable from '../ManageUser/LibrarianBookTable';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -44,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BorrowedBookTable({ userData }) {
+export default function BorrowedBookTable({ userData, isLibrarian }) {
   const classes = useStyles();
 
   const books = JSON.parse(localStorage.getItem('books'));
@@ -62,38 +63,44 @@ export default function BorrowedBookTable({ userData }) {
   });
   console.log(data);
 
-  return (
-    <TableContainer component={Paper}>
-      {data != null ? (
-        <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Title</StyledTableCell>
-              <StyledTableCell align="right">Aurthor</StyledTableCell>
-              <StyledTableCell align="right">ISBN #</StyledTableCell>
-              <StyledTableCell align="right">Borrowed Date</StyledTableCell>
-              <StyledTableCell align="right">Due Date</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((book) => (
-              <StyledTableRow key={book.id}>
-                <StyledTableCell component="th" scope="row">
-                  {book.bookName}
-                </StyledTableCell>
-                <StyledTableCell align="right">{book.aurthor}</StyledTableCell>
-                <StyledTableCell align="right">{book.isbn}</StyledTableCell>
-                <StyledTableCell align="right">
-                  {book.borrowData}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {book.returnDate}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      ) : null}
-    </TableContainer>
-  );
+  if (isLibrarian) {
+    return <LibrarianBookTable data={data} />;
+  } else {
+    return (
+      <TableContainer component={Paper}>
+        {data != null ? (
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Title</StyledTableCell>
+                <StyledTableCell align="right">Aurthor</StyledTableCell>
+                <StyledTableCell align="right">ISBN #</StyledTableCell>
+                <StyledTableCell align="right">Borrowed Date</StyledTableCell>
+                <StyledTableCell align="right">Due Date</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((book) => (
+                <StyledTableRow key={book.id}>
+                  <StyledTableCell component="th" scope="row">
+                    {book.bookName}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {book.aurthor}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{book.isbn}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    {book.borrowData}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {book.returnDate}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        ) : null}
+      </TableContainer>
+    );
+  }
 }
