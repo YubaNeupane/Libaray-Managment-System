@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import SearchBar from '../Search/SearchBar';
+import SearchBar from './UserSearch';
 import UserTable from './UserTable';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +30,23 @@ export default function ManageBook() {
     initUsers = JSON.parse(localStorage.getItem('users'));
   }, []);
 
+  const handleSearch = () => {
+    if (searchValue.length <= 1) {
+      setUsers(initUsers);
+    } else {
+      setUsers(
+        initUsers.filter((user) => {
+          return (
+            user.firstName.toLowerCase().includes(searchValue.toLowerCase()) ||
+            user.email.toLowerCase().includes(searchValue.toLowerCase()) ||
+            user.uid.toLowerCase().includes(searchValue.toLowerCase()) ||
+            user.lastName.toLowerCase().includes(searchValue.toLowerCase())
+          );
+        })
+      );
+    }
+  };
+
   return (
     <div className={classes.root}>
       <Grid
@@ -46,12 +63,12 @@ export default function ManageBook() {
           </Typography>
         </Grid>
         <Grid item xs={6} xs={6}>
-          <SearchBar />
-          {/* <SearchBar
+          {/* <SearchBar /> */}
+          <SearchBar
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             handleSearch={handleSearch}
-          /> */}
+          />
         </Grid>
 
         <Grid item xs={12}>
