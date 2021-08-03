@@ -96,7 +96,7 @@ export default function UserTable({ users, currentUser }) {
               <StyledTableCell align="left">{user.lastName}</StyledTableCell>
               <StyledTableCell align="left">{user.email}</StyledTableCell>
               <StyledTableCell align="left">
-                <MoreInfoModel />
+                <MoreInfoModel user={user} />
               </StyledTableCell>
               {currentUser.isAdmin ? (
                 <StyledTableCell align="left">

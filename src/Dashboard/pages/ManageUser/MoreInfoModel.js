@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 
 import InfoIcon from '@material-ui/icons/Info';
+import InfoLayout from './InfoLayout';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -29,7 +30,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
+export default function FullScreenDialog({ user }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -67,7 +68,7 @@ export default function FullScreenDialog() {
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Sound
+              {user.firstName + ' ' + user.lastName}
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
               save
@@ -75,15 +76,8 @@ export default function FullScreenDialog() {
           </Toolbar>
         </AppBar>
         <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
-            />
+          <ListItem>
+            <InfoLayout />
           </ListItem>
         </List>
       </Dialog>
