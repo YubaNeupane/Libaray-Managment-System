@@ -68,8 +68,8 @@ export default function SignIn({
 
     dispatch(signin(user));
     dispatch(getBook());
-    dispatch(getUsersData());
     dispatch(getReturnDate());
+    dispatch(getUsersData());
 
     notify('Login Failed! Try again...');
   };

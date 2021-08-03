@@ -162,6 +162,7 @@ export const borrowBook = (
     const d = {
       bookId: bookId,
       returnDate: returnDate,
+      borrowData: new Date().toDateString(),
     };
 
     const data = [...currentBorrowBooks, d];

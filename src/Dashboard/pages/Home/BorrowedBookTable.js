@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -44,35 +44,56 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BorrowedBookTable() {
+export default function BorrowedBookTable({ userData }) {
   const classes = useStyles();
+
+  const books = JSON.parse(localStorage.getItem('books'));
+
+  const data = [];
+  userData.borrowedBooks.forEach((book) => {
+    const temp = books.find((element) => element.id == book.bookId);
+    const d = {
+      ...temp,
+      returnDate: book.returnDate,
+      borrowData: book.borrowData,
+    };
+
+    data.push(d);
+  });
+  console.log(data);
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
+      {data != null ? (
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Title</StyledTableCell>
+              <StyledTableCell align="right">Aurthor</StyledTableCell>
+              <StyledTableCell align="right">ISBN #</StyledTableCell>
+              <StyledTableCell align="right">Borrowed Date</StyledTableCell>
+              <StyledTableCell align="right">Due Date</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((book) => (
+              <StyledTableRow key={book.id}>
+                <StyledTableCell component="th" scope="row">
+                  {book.bookName}
+                </StyledTableCell>
+                <StyledTableCell align="right">{book.aurthor}</StyledTableCell>
+                <StyledTableCell align="right">{book.isbn}</StyledTableCell>
+                <StyledTableCell align="right">
+                  {book.borrowData}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {book.returnDate}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : null}
     </TableContainer>
   );
 }

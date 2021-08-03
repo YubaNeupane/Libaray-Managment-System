@@ -45,25 +45,14 @@ export default function Home({ userData }) {
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            <BorrowedBookTable />
+            <Typography variant="h4" component="h4">
+              Currently Borrowing
+            </Typography>
+            <BorrowedBookTable userData={userData} />
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <BorrowedBookTable />
-          </Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
+          <Paper className={classes.paper}>{/* <BorrowedBookTable /> */}</Paper>
         </Grid>
       </Grid>
     </div>
