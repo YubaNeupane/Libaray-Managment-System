@@ -14,6 +14,7 @@ import {
   lowerBookQuanity,
   getBook,
   getCurrentUserData,
+  reserveBook,
 } from '../../Redux/actions';
 
 export default function ConfirmationAlert({
@@ -25,6 +26,20 @@ export default function ConfirmationAlert({
   const dispatch = useDispatch();
 
   const handleReserveBook = () => {
+    const currentBookReserved = JSON.parse(localStorage.getItem('user'))
+      .reservedBooks;
+    const user = JSON.parse(localStorage.getItem('user')).uid;
+
+    dispatch(
+      reserveBook(book.id, currentBookReserved, user, reserveBookCallBack)
+    );
+
+    handleClose();
+  };
+
+  const reserveBookCallBack = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    dispatch(getCurrentUserData(user.uid, user));
     handleClose();
   };
 
