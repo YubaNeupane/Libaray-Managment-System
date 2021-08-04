@@ -55,7 +55,11 @@ export default function InfoLayout({ user }) {
               Currently Reserving
             </Typography>
             <br></br>
-            <BorrowedBookTable userData={user} isLibrarian={true} />
+            <BorrowedBookTable
+              userData={user}
+              isLibrarian={true}
+              isReservedBook={true}
+            />
           </Paper>
         </Grid>
       </Grid>

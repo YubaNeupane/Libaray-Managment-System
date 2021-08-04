@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import LibrarianBookTable from '../ManageUser/LibrarianBookTable';
+import LibrarianBookReserveTable from '../ManageUser/LibrarianBookReserveTable';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -45,7 +46,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BorrowedBookTable({ userData, isLibrarian }) {
+export default function BorrowedBookTable({
+  userData,
+  isLibrarian,
+  isReservedBook,
+}) {
   const classes = useStyles();
 
   const books = JSON.parse(localStorage.getItem('books'));
@@ -61,7 +66,21 @@ export default function BorrowedBookTable({ userData, isLibrarian }) {
 
     data.push(d);
   });
-  console.log(data);
+
+  if (isLibrarian && isReservedBook) {
+    const data = [];
+    userData.reservedBooks.forEach((book) => {
+      const temp = books.find((element) => element.id == book.bookId);
+      const d = {
+        ...temp,
+        reserveDate: book.reserveDate,
+      };
+
+      data.push(d);
+    });
+
+    return <LibrarianBookReserveTable data={data} />;
+  }
 
   if (isLibrarian) {
     return <LibrarianBookTable data={data} />;

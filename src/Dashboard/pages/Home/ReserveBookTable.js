@@ -50,12 +50,11 @@ export default function ReserveBookTable({ userData }) {
   const books = JSON.parse(localStorage.getItem('books'));
 
   const data = [];
-  userData.borrowedBooks.forEach((book) => {
+  userData.reservedBooks.forEach((book) => {
     const temp = books.find((element) => element.id == book.bookId);
     const d = {
       ...temp,
-      returnDate: book.returnDate,
-      borrowData: book.borrowData,
+      reserveDate: book.reserveDate,
     };
 
     data.push(d);
@@ -71,8 +70,7 @@ export default function ReserveBookTable({ userData }) {
               <StyledTableCell>Title</StyledTableCell>
               <StyledTableCell align="right">Aurthor</StyledTableCell>
               <StyledTableCell align="right">ISBN #</StyledTableCell>
-              <StyledTableCell align="right">Borrowed Date</StyledTableCell>
-              <StyledTableCell align="right">Due Date</StyledTableCell>
+              <StyledTableCell align="right">Reserve Date</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -84,10 +82,7 @@ export default function ReserveBookTable({ userData }) {
                 <StyledTableCell align="right">{book.aurthor}</StyledTableCell>
                 <StyledTableCell align="right">{book.isbn}</StyledTableCell>
                 <StyledTableCell align="right">
-                  {book.borrowData}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {book.returnDate}
+                  {book.reserveDate}
                 </StyledTableCell>
               </StyledTableRow>
             ))}
