@@ -68,3 +68,9 @@ export const getUserDataConstant = {
   GET_USER_SUCCESS: 'GET_USER_SUCCESS',
   GET_USER_FAILED: 'GET_USER_FAILED',
 };
+
+export const editUserDataConstant = {
+  EDIT_USER_REQUEST: 'EDIT_USER_REQUEST',
+  EDIT_USER_SUCCESS: 'EDIT_USER_SUCCESS',
+  EDIT_USER_FAILED: 'EDIT_USER_FAILED',
+};

@@ -22,7 +22,15 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SaveIcon from '@material-ui/icons/Save';
-import { editBook, getBook } from '../../../Redux/actions';
+import {
+  editBook,
+  getBook,
+  editUser,
+  getUsersData,
+  getCurrentUserData,
+  getCurrentUserDataWithNoLoad,
+  getUsersDataWithCallBack,
+} from '../../../Redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -63,7 +71,6 @@ export default function EditUserModel({ user }) {
   const [userLastName, setUserLastName] = useState(user.lastName);
   const [userEmail, setUserEmail] = useState(user.email);
   const [userIsLibrarian, setUserIsLibrarian] = useState(user.isLibrarian);
-  const [borrowedBooks, setBorrowedBooks] = useState(user.borrowedBooks);
 
   const dispatch = useDispatch();
 
@@ -86,17 +93,25 @@ export default function EditUserModel({ user }) {
   };
 
   const handleEdit = () => {
-    // const bookData = {
-    //   bookName,
-    //   aurthor,
-    //   id: book.id,
-    //   isbn,
-    //   quantity,
-    //   preface,
-    //   imageUrl,
-    // };
-    // dispatch(editBook(bookData, book.id, handleClose, toastCallBack));
-    // dispatch(getBook());
+    const data = {
+      firstName: userFirstName,
+      lastName: userLastName,
+      email: userEmail,
+      isLibrarian: userIsLibrarian,
+    };
+    dispatch(editUser(user.uid, data, callBack));
+  };
+
+  const callBack = () => {
+    toastCallBack('Edited user successfully! ');
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+
+    dispatch(getCurrentUserDataWithNoLoad(currentUser.uid, currentUser));
+    dispatch(getUsersDataWithCallBack(reloadPage));
+  };
+
+  const reloadPage = () => {
+    window.location.reload();
   };
 
   const classes = useStyles();

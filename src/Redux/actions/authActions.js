@@ -130,6 +130,39 @@ export const getCurrentUserData = (userUID, currentData) => {
   };
 };
 
+export const getCurrentUserDataWithNoLoad = (userUID, currentData) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+    dispatch({ type: getUserDataConstant.GET_USER_REQUEST });
+
+    db.collection('users')
+      .doc(userUID)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          const loggedInUser = {
+            firstName: currentData.firstName,
+            lastName: currentData.lastName,
+            email: currentData.email,
+            uid: currentData.uid,
+            createdAt: doc.data().createdAt,
+            isAdmin: doc.data().isAdmin,
+            isLibrarian: doc.data().isLibrarian,
+            isUser: doc.data().isUser,
+            borrowedBooks: doc.data().borrowedBooks,
+            reservedBooks: doc.data().reservedBooks,
+          };
+          dispatch({ type: getUserDataConstant.GET_USER_SUCCESS });
+
+          localStorage.setItem('user', JSON.stringify(loggedInUser));
+        }
+      })
+      .catch((e) => {
+        dispatch({ type: getUserDataConstant.GET_USER_FAILED });
+      });
+  };
+};
+
 export const signin = (user) => {
   return async (dispatch) => {
     dispatch({ type: `${authConstant.USER_LOGIN}_REQUEST` });

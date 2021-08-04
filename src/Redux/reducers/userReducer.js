@@ -1,6 +1,7 @@
 import {
   manageUserConstant,
   setReturnDateConstant,
+  editUserDataConstant,
 } from '../actions/constants';
 
 const initState = {
@@ -28,6 +29,15 @@ export default (state = initState, action) => {
       break;
 
     case setReturnDateConstant.SET_RETURN_DATE_FAILED:
+      break;
+
+    case editUserDataConstant.EDIT_USER_SUCCESS:
+      break;
+
+    case editUserDataConstant.EDIT_USER_FAILED:
+      break;
+
+    case editUserDataConstant.EDIT_USER_REQUEST:
       break;
   }
   return state;

@@ -4,6 +4,7 @@ import {
   manageUserConstant,
   setReturnDateConstant,
   getReturnDateConstant,
+  editUserDataConstant,
 } from './constants';
 
 export const getUsersData = () => {
@@ -26,6 +27,37 @@ export const getUsersData = () => {
         dispatch({
           type: manageUserConstant.GET_USERS_SUCCESS,
         });
+      })
+      .catch((e) => {
+        dispatch({
+          type: manageUserConstant.GET_USERS_FAILED,
+          payload: e,
+        });
+      });
+  };
+};
+
+export const getUsersDataWithCallBack = (callBack) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+    dispatch({
+      type: manageUserConstant.GET_USERS_REQUEST,
+    });
+
+    db.collection('users')
+      .get()
+      .then((queryData) => {
+        let data = [];
+
+        queryData.forEach((doc) => {
+          data.push(doc.data());
+        });
+        localStorage.setItem('users', JSON.stringify(data));
+
+        dispatch({
+          type: manageUserConstant.GET_USERS_SUCCESS,
+        });
+        callBack();
       })
       .catch((e) => {
         dispatch({
@@ -90,6 +122,35 @@ export const setReturnDate = (newDate, callBack) => {
       .catch((error) => {
         dispatch({
           type: setReturnDateConstant.SET_RETURN_DATE_FAILED,
+        });
+      });
+  };
+};
+
+export const editUser = (userID, newUserData, callBack) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+    dispatch({
+      type: editUserDataConstant.EDIT_USER_REQUEST,
+    });
+
+    db.collection('users')
+      .doc(userID)
+      .update({
+        firstName: newUserData.firstName,
+        lastName: newUserData.lastName,
+        email: newUserData.email,
+        isLibrarian: newUserData.isLibrarian,
+      })
+      .then(() => {
+        dispatch({
+          type: editUserDataConstant.EDIT_USER_SUCCESS,
+        });
+        callBack();
+      })
+      .catch((error) => {
+        dispatch({
+          type: editUserDataConstant.EDIT_USER_FAILED,
         });
       });
   };
