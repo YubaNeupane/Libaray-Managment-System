@@ -43,24 +43,20 @@ export default function InfoLayout({ user }) {
         <Grid item xs={12} sm={12}>
           <Paper className={classes.paper}>
             <Typography variant="h5" component="h5" color="textSecondary">
-              Books Currently Borrowing
+              Currently Borrowing
             </Typography>
             <br></br>
             <BorrowedBookTable userData={user} isLibrarian={true} />
-            {/* <BorrowedBookTable userData={user} /> */}
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
+        <Grid item xs={12} sm={12}>
+          <Paper className={classes.paper}>
+            <Typography variant="h5" component="h5" color="textSecondary">
+              Currently Reserving
+            </Typography>
+            <br></br>
+            <BorrowedBookTable userData={user} isLibrarian={true} />
+          </Paper>
         </Grid>
       </Grid>
     </div>

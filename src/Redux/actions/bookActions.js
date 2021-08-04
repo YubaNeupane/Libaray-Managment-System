@@ -6,6 +6,7 @@ import {
   deleteBookConstant,
   borrowBookConstant,
   lowerBookQuanityConstant,
+  reserveBookConstant,
 } from './constants';
 
 export const addBook = (bookData, callBack) => {
@@ -181,6 +182,39 @@ export const borrowBook = (
       .catch((error) => {
         dispatch({
           type: borrowBookConstant.BORROW_BOOK_FAILED,
+        });
+      });
+  };
+};
+
+export const reserveBook = (bookId, currentReserveBooks, user, callBack) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+    dispatch({
+      type: reserveBookConstant.RESERVE_BOOK_REQUEST,
+    });
+
+    const d = {
+      bookId: bookId,
+      reserveDate: new Date().toDateString(),
+    };
+
+    const data = [...currentReserveBooks, d];
+
+    db.collection('users')
+      .doc(user)
+      .update({
+        reservedBooks: [...data],
+      })
+      .then(() => {
+        dispatch({
+          type: reserveBookConstant.RESERVE_BOOK_SUCCESS,
+        });
+        callBack();
+      })
+      .catch((error) => {
+        dispatch({
+          type: reserveBookConstant.RESERVE_BOOK_FAILED,
         });
       });
   };

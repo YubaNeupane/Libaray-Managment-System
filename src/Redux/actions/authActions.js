@@ -34,6 +34,7 @@ export const signup = (user) => {
                 isLibrarian: false,
                 isUser: true,
                 borrowedBooks: [],
+                reservedBooks: [],
               })
               .then(() => {
                 //succeful
@@ -53,6 +54,7 @@ export const signup = (user) => {
                         isLibrarian: doc.data().isLibrarian,
                         isUser: doc.data().isUser,
                         borrowedBooks: doc.data().borrowedBooks,
+                        reservedBooks: doc.data().reservedBooks,
                       };
 
                       localStorage.setItem(
@@ -114,6 +116,7 @@ export const getCurrentUserData = (userUID, currentData) => {
             isLibrarian: doc.data().isLibrarian,
             isUser: doc.data().isUser,
             borrowedBooks: doc.data().borrowedBooks,
+            reservedBooks: doc.data().reservedBooks,
           };
           dispatch({ type: getUserDataConstant.GET_USER_SUCCESS });
 
@@ -156,6 +159,7 @@ export const signin = (user) => {
                 isLibrarian: doc.data().isLibrarian,
                 isUser: doc.data().isUser,
                 borrowedBooks: doc.data().borrowedBooks,
+                reservedBooks: doc.data().reservedBooks,
               };
 
               localStorage.setItem('user', JSON.stringify(loggedInUser));

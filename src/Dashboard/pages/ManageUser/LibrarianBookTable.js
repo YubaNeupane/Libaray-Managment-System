@@ -2,28 +2,28 @@ import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 180 },
+  { field: 'id', headerName: 'ID', width: 300 },
   {
     field: 'bookName',
     headerName: 'Book Title',
-    width: 200,
+    width: 250,
     editable: false,
   },
   {
     field: 'aurthor',
     headerName: 'Last name',
-    width: 200,
+    width: 250,
     editable: true,
   },
   {
     field: 'borrowData',
     headerName: 'Borrow Date',
-    width: 200,
+    width: 250,
   },
   {
     field: 'returnDate',
     headerName: 'Return Date',
-    width: 200,
+    width: 250,
   },
 ];
 
