@@ -34,11 +34,19 @@ export default function FullScreenDialog({ user }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
+  const [reserveBooksSelect, setReserveBookSelect] = React.useState([]);
+  const [borrowBooksSelect, setBorrowBooksSelect] = React.useState([]);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    const data = {
+      reserveBooksSelect,
+      borrowBooksSelect,
+    };
+    console.log(data);
     setOpen(false);
   };
 
@@ -77,7 +85,13 @@ export default function FullScreenDialog({ user }) {
         </AppBar>
         <List>
           <ListItem>
-            <InfoLayout user={user} />
+            <InfoLayout
+              user={user}
+              setReserveBookSelect={setReserveBookSelect}
+              setBorrowBooksSelect={setBorrowBooksSelect}
+              reserveBooksSelect={reserveBooksSelect}
+              borrowBooksSelect={borrowBooksSelect}
+            />
           </ListItem>
         </List>
       </Dialog>

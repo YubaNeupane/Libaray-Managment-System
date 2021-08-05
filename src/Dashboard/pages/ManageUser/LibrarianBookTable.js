@@ -39,8 +39,11 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-export default function DataTable({ data }) {
-  console.log(data);
+export default function DataTable({
+  data,
+  setBorrowBooksSelect,
+  borrowBooksSelect,
+}) {
   return (
     <DataGrid
       rows={data}
@@ -48,7 +51,10 @@ export default function DataTable({ data }) {
       columns={columns}
       pageSize={10}
       checkboxSelection
-      disableSelectionOnClick
+      onSelectionModelChange={(newSelection) => {
+        setBorrowBooksSelect(newSelection);
+      }}
+      selectionModel={borrowBooksSelect}
     />
   );
 }

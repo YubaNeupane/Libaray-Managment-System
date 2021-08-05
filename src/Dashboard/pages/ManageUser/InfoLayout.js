@@ -17,7 +17,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function InfoLayout({ user }) {
+export default function InfoLayout({
+  user,
+  setReserveBookSelect,
+  setBorrowBooksSelect,
+  reserveBooksSelect,
+  borrowBooksSelect,
+}) {
   const classes = useStyles();
 
   return (
@@ -46,7 +52,14 @@ export default function InfoLayout({ user }) {
               Currently Borrowing
             </Typography>
             <br></br>
-            <BorrowedBookTable userData={user} isLibrarian={true} />
+            <BorrowedBookTable
+              userData={user}
+              isLibrarian={true}
+              setReserveBookSelect={setReserveBookSelect}
+              setBorrowBooksSelect={setBorrowBooksSelect}
+              reserveBooksSelect={reserveBooksSelect}
+              borrowBooksSelect={borrowBooksSelect}
+            />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -59,6 +72,10 @@ export default function InfoLayout({ user }) {
               userData={user}
               isLibrarian={true}
               isReservedBook={true}
+              setReserveBookSelect={setReserveBookSelect}
+              setBorrowBooksSelect={setBorrowBooksSelect}
+              reserveBooksSelect={reserveBooksSelect}
+              borrowBooksSelect={borrowBooksSelect}
             />
           </Paper>
         </Grid>

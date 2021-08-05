@@ -50,6 +50,10 @@ export default function BorrowedBookTable({
   userData,
   isLibrarian,
   isReservedBook,
+  setReserveBookSelect,
+  setBorrowBooksSelect,
+  reserveBooksSelect,
+  borrowBooksSelect,
 }) {
   const classes = useStyles();
 
@@ -79,11 +83,23 @@ export default function BorrowedBookTable({
       data.push(d);
     });
 
-    return <LibrarianBookReserveTable data={data} />;
+    return (
+      <LibrarianBookReserveTable
+        data={data}
+        setReserveBookSelect={setReserveBookSelect}
+        reserveBooksSelect={reserveBooksSelect}
+      />
+    );
   }
 
   if (isLibrarian) {
-    return <LibrarianBookTable data={data} />;
+    return (
+      <LibrarianBookTable
+        data={data}
+        setBorrowBooksSelect={setBorrowBooksSelect}
+        borrowBooksSelect={borrowBooksSelect}
+      />
+    );
   } else {
     return (
       <TableContainer component={Paper}>
