@@ -21,6 +21,7 @@ import {
   returnBook,
   getBook,
   borrowBook,
+  lowerBookQuanity,
 } from '../../../Redux/actions/bookActions';
 import {
   getCurrentUserDataWithNoLoad,
@@ -149,10 +150,12 @@ export default function FullScreenDialog({ user }) {
 
     data.forEach((id, i) => {
       dispatch(borrowBook(id, t, user.uid, getUpdatedBooks, returnDate));
+      dispatch(lowerBookQuanity(id));
       if (i == data.length - 1) {
         updateEverythingCallBack();
       }
     });
+    updateEverythingCallBack();
   };
 
   const getUpdatedBooks = () => {

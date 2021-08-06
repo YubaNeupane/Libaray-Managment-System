@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Layout from './Layout';
 import ConfirmationAlert from './ConfirmationAlert';
+import { returnBook } from '../../Redux/actions';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -15,6 +16,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function BorrowBookModel({ handleClose, open, book }) {
   const [openConfirmationAlert, setConfirmationAlert] = React.useState(false);
+  const currentUser = JSON.parse(localStorage.getItem('user'));
 
   const handleClickOpenConfiramtionAlert = () => {
     setConfirmationAlert(true);
@@ -56,29 +58,37 @@ export default function BorrowBookModel({ handleClose, open, book }) {
             <Layout book={book} />
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-          {parseInt(book.quantity) > 0 ? (
-            <Button
-              onClick={handleClose}
-              color="secondary"
-              variant="contained"
-              onClick={handleClickOpenConfiramtionAlert}
-            >
-              Borrow Book
+        {currentUser.isLibrarian ? (
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Close
             </Button>
-          ) : (
-            <Button
-              onClick={handleClickOpenConfiramtionAlert}
-              color="primary"
-              variant="contained"
-            >
-              Reserve Book
+          </DialogActions>
+        ) : (
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Close
             </Button>
-          )}
-        </DialogActions>
+            {parseInt(book.quantity) > 0 ? (
+              <Button
+                onClick={handleClose}
+                color="secondary"
+                variant="contained"
+                onClick={handleClickOpenConfiramtionAlert}
+              >
+                Borrow Book
+              </Button>
+            ) : (
+              <Button
+                onClick={handleClickOpenConfiramtionAlert}
+                color="primary"
+                variant="contained"
+              >
+                Reserve Book
+              </Button>
+            )}
+          </DialogActions>
+        )}
       </Dialog>
     </div>
   );
