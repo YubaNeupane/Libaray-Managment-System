@@ -16,7 +16,16 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import InfoIcon from '@material-ui/icons/Info';
 import InfoLayout from './InfoLayout';
-import { borrowBook } from '../../../Redux/actions/bookActions';
+import {
+  increaseBookQuanity,
+  returnBook,
+  getBook,
+} from '../../../Redux/actions/bookActions';
+import {
+  getCurrentUserDataWithNoLoad,
+  getUsersData,
+  getCurrentUserData,
+} from '../../../Redux/actions';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -69,17 +78,61 @@ export default function FullScreenDialog({ user }) {
           });
         }
       });
+
       newBook = b;
 
       return newBook;
     }
     return null;
   };
+
+  const getSelectedBooks = () => {
+    const data = {
+      borrowBooksSelect,
+    };
+
+    if (data.borrowBooksSelect.length !== 0) {
+      let newBook = [];
+      const b = [...user.borrowedBooks];
+
+      let bookId = [];
+
+      b.forEach((book) => {
+        bookId.push(book.bookId);
+      });
+
+      data.borrowBooksSelect.forEach((selectedBook) => {
+        const ind = bookId.indexOf(selectedBook);
+        newBook.push(b[ind]);
+      });
+
+      return newBook;
+    }
+    return null;
+  };
+
   const dispatch = useDispatch();
 
   const handleSave = () => {
+    const selectedBooks = getSelectedBooks();
+    if (selectedBooks != null) {
+      dispatch(increaseBookQuanity(selectedBooks, updateBookCallBack));
+    }
+  };
+
+  const updateBookCallBack = () => {
     const newBook = getNewBook();
-    console.log(newBook);
+    dispatch(getBook());
+    if (newBook != null) {
+      dispatch(returnBook(newBook, user.uid, updateEverythingCallBack));
+    }
+  };
+
+  const updateEverythingCallBack = () => {
+    dispatch(getBook());
+    dispatch(getUsersData());
+    dispatch(getCurrentUserData(user.uid, user));
+    handleClose();
   };
 
   const handleClose = () => {

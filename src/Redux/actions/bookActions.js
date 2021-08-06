@@ -246,7 +246,49 @@ export const reserveBook = (bookId, currentReserveBooks, user, callBack) => {
   };
 };
 
-export const lowerBookQuanity = (bookId, currentQuanity) => {
+export const increaseBookQuanity = (books, callBack) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+    dispatch({
+      type: lowerBookQuanityConstant.LOWER_BOOK_QUANITY_REQUEST,
+    });
+
+    const currectBooks = JSON.parse(localStorage.getItem('books'));
+
+    let book = [];
+
+    books.forEach((b) => {
+      const d = currectBooks.filter((book) => {
+        return book.id == b.bookId;
+      });
+      book = [...book, ...d];
+    });
+
+    book.forEach((b, i) => {
+      db.collection('books')
+        .doc(b.id)
+        .update({
+          quantity: (parseInt(b.quantity) + 1).toString(),
+        })
+        .then(() => {
+          dispatch({
+            type: lowerBookQuanityConstant.LOWER_BOOK_QUANITY_SUCCESS,
+          });
+          if (i == book.length) {
+            callBack();
+          }
+        })
+        .catch((error) => {
+          dispatch({
+            type: lowerBookQuanityConstant.LOWER_BOOK_QUANITY_FAILED,
+          });
+        });
+    });
+    callBack();
+  };
+};
+
+export const lowerBookQuanity = (bookId, currentQuanity, callBack) => {
   return async (dispatch) => {
     const db = firebase.firestore();
     dispatch({
@@ -263,6 +305,7 @@ export const lowerBookQuanity = (bookId, currentQuanity) => {
         dispatch({
           type: lowerBookQuanityConstant.LOWER_BOOK_QUANITY_SUCCESS,
         });
+        callBack();
       })
       .catch((error) => {
         dispatch({

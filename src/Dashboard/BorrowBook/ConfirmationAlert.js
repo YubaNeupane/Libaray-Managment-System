@@ -40,16 +40,22 @@ export default function ConfirmationAlert({
   const reserveBookCallBack = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     dispatch(getCurrentUserData(user.uid, user));
+    dispatch(getBook());
+    dispatch(getBook());
     handleClose();
   };
 
   const callBack = () => {
+    dispatch(lowerBookQuanity(book.id, book.quantity, updateEveything));
+  };
+
+  const updateEveything = () => {
     const user = JSON.parse(localStorage.getItem('user'));
 
-    dispatch(lowerBookQuanity(book.id, book.quantity));
     dispatch(getBook());
     dispatch(getBook());
     dispatch(getCurrentUserData(user.uid, user));
+    dispatch(getUsersData());
 
     handleClose();
   };
