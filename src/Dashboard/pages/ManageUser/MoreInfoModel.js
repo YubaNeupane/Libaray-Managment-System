@@ -12,9 +12,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InfoIcon from '@material-ui/icons/Info';
 import InfoLayout from './InfoLayout';
+import { borrowBook } from '../../../Redux/actions/bookActions';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -41,12 +43,46 @@ export default function FullScreenDialog({ user }) {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const getNewBook = () => {
     const data = {
       reserveBooksSelect,
       borrowBooksSelect,
     };
-    console.log(data);
+
+    if (data.borrowBooksSelect.length !== 0) {
+      let newBook;
+      const b = [...user.borrowedBooks];
+
+      let bookId = [];
+
+      b.forEach((book) => {
+        bookId.push(book.bookId);
+      });
+
+      data.borrowBooksSelect.forEach((selectedBook) => {
+        const ind = bookId.indexOf(selectedBook);
+        if (ind !== -1) {
+          b.splice(ind, 1);
+          bookId = [];
+          b.forEach((book) => {
+            bookId.push(book.bookId);
+          });
+        }
+      });
+      newBook = b;
+
+      return newBook;
+    }
+    return null;
+  };
+  const dispatch = useDispatch();
+
+  const handleSave = () => {
+    const newBook = getNewBook();
+    console.log(newBook);
+  };
+
+  const handleClose = () => {
     setOpen(false);
   };
 
@@ -78,7 +114,7 @@ export default function FullScreenDialog({ user }) {
             <Typography variant="h6" className={classes.title}>
               {user.firstName + ' ' + user.lastName}
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button autoFocus color="inherit" onClick={handleSave}>
               save
             </Button>
           </Toolbar>

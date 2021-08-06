@@ -187,6 +187,32 @@ export const borrowBook = (
   };
 };
 
+export const returnBook = (newBooks, user, callBack) => {
+  return async (dispatch) => {
+    const db = firebase.firestore();
+    dispatch({
+      type: borrowBookConstant.BORROW_BOOK_REQUEST,
+    });
+
+    db.collection('users')
+      .doc(user)
+      .update({
+        borrowedBooks: newBooks,
+      })
+      .then(() => {
+        dispatch({
+          type: borrowBookConstant.BORROW_BOOK_SUCCESS,
+        });
+        callBack();
+      })
+      .catch((error) => {
+        dispatch({
+          type: borrowBookConstant.BORROW_BOOK_FAILED,
+        });
+      });
+  };
+};
+
 export const reserveBook = (bookId, currentReserveBooks, user, callBack) => {
   return async (dispatch) => {
     const db = firebase.firestore();
