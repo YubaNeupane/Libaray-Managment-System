@@ -13,6 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import MoreInfoModel from './MoreInfoModel';
 import EditUserModel from './EditUserModel';
+import ResetPassword from './ResetPassword';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -59,14 +60,14 @@ export default function UserTable({ users, currentUser }) {
 
   return (
     <TableContainer component={Paper}>
-      <Button
+      {/* <Button
         variant="contained"
         color="primary"
         className={classes.button}
         startIcon={<AddCircleIcon />}
       >
         Create User
-      </Button>
+      </Button> */}
 
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
@@ -79,6 +80,9 @@ export default function UserTable({ users, currentUser }) {
             <StyledTableCell align="left">More Info</StyledTableCell>
             {currentUser.isAdmin ? (
               <StyledTableCell align="left">Edit User</StyledTableCell>
+            ) : null}
+            {currentUser.isAdmin ? (
+              <StyledTableCell align="left">Reset Password</StyledTableCell>
             ) : null}
             {/* <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell> */}
           </TableRow>
@@ -98,9 +102,15 @@ export default function UserTable({ users, currentUser }) {
               <StyledTableCell align="left">
                 <MoreInfoModel user={user} />
               </StyledTableCell>
+
+              {currentUser.isAdmin ? (
+                <StyledTableCell align="right">
+                  <EditUserModel user={user} />
+                </StyledTableCell>
+              ) : null}
               {currentUser.isAdmin ? (
                 <StyledTableCell align="left">
-                  <EditUserModel user={user} />
+                  <ResetPassword email={user.email} />
                 </StyledTableCell>
               ) : null}
             </StyledTableRow>

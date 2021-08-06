@@ -58,7 +58,7 @@ export default function BorrowBookModel({ handleClose, open, book }) {
             <Layout book={book} />
           </DialogContentText>
         </DialogContent>
-        {currentUser.isLibrarian ? (
+        {currentUser.isLibrarian || currentUser.isAdmin ? (
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               Close

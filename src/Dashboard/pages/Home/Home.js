@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home({ userData }) {
   const classes = useStyles();
+  const currentUser = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div className={classes.root}>
@@ -44,22 +45,26 @@ export default function Home({ userData }) {
             <Carousel />
           </Paper>
         </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <Typography variant="h4" component="h4">
-              Currently Borrowing
-            </Typography>
-            <BorrowedBookTable userData={userData} />
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <Typography variant="h4" component="h4">
-              Currently Reserving
-            </Typography>
-            <ReserveBookTable userData={userData} />
-          </Paper>
-        </Grid>
+        {currentUser.isLibrarian || currentUser.isAdmin ? null : (
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <Typography variant="h4" component="h4">
+                Currently Borrowing
+              </Typography>
+              <BorrowedBookTable userData={userData} />
+            </Paper>
+          </Grid>
+        )}
+        {currentUser.isLibrarian || currentUser.isAdmin ? null : (
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <Typography variant="h4" component="h4">
+                Currently Reserving
+              </Typography>
+              <ReserveBookTable userData={userData} />
+            </Paper>
+          </Grid>
+        )}
       </Grid>
     </div>
   );

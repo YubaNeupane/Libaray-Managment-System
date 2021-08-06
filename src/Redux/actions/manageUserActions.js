@@ -155,3 +155,18 @@ export const editUser = (userID, newUserData, callBack) => {
       });
   };
 };
+
+export const sendResetPasswordEmail = (email, callBack) => {
+  return async (dispatch) => {
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        callBack();
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+  };
+};
