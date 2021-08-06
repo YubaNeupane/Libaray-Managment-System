@@ -20,6 +20,7 @@ import {
   increaseBookQuanity,
   returnBook,
   getBook,
+  borrowBook,
 } from '../../../Redux/actions/bookActions';
 import {
   getCurrentUserDataWithNoLoad,
@@ -117,6 +118,8 @@ export default function FullScreenDialog({ user }) {
     const selectedBooks = getSelectedBooks();
     if (selectedBooks != null) {
       dispatch(increaseBookQuanity(selectedBooks, updateBookCallBack));
+    } else {
+      handleReserveBooksSelected();
     }
   };
 
@@ -124,8 +127,36 @@ export default function FullScreenDialog({ user }) {
     const newBook = getNewBook();
     dispatch(getBook());
     if (newBook != null) {
-      dispatch(returnBook(newBook, user.uid, updateEverythingCallBack));
+      dispatch(returnBook(newBook, user.uid, handleReserveBooksSelected));
+    } else {
+      handleReserveBooksSelected();
     }
+  };
+
+  const handleReserveBooksSelected = () => {
+    const data = reserveBooksSelect;
+    const returnDate = JSON.parse(localStorage.getItem('returnDate'))
+      .returnDate;
+
+    const currectBooks = JSON.parse(localStorage.getItem('users'))
+      .borrowedBooks;
+
+    const t = [];
+
+    if (currectBooks !== undefined) {
+      currectBooks.forEach((data) => t.push(data));
+    }
+
+    data.forEach((id, i) => {
+      dispatch(borrowBook(id, t, user.uid, getUpdatedBooks, returnDate));
+      if (i == data.length - 1) {
+        updateEverythingCallBack();
+      }
+    });
+  };
+
+  const getUpdatedBooks = () => {
+    dispatch(getBook());
   };
 
   const updateEverythingCallBack = () => {
