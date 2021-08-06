@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import ForgetPasswordModel from './ForgetPasswordModel';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ handleClickOpenSignUp, signInUser }) {
+export default function SignIn({ handleClickOpenSignUp, signInUser, notify }) {
   const classes = useStyles();
 
   const [email, setEmail] = useState('');
@@ -98,7 +99,7 @@ export default function SignIn({ handleClickOpenSignUp, signInUser }) {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Typography variant="body2">Forgot password?</Typography>
+              <ForgetPasswordModel notify={notify} />
             </Grid>
             <Grid item>
               <Typography variant="body2" onClick={handleClickOpenSignUp}>

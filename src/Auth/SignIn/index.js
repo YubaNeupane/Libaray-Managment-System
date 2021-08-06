@@ -103,6 +103,7 @@ export default function SignIn({
           handleClose={handleClose}
           handleClickOpenSignUp={handleCloseAndOpen}
           signInUser={signInUser}
+          notify={notify}
         />
         <DialogActions>
           <Button onClick={handleClose} color="primary">
